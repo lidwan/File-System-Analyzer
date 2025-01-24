@@ -1,6 +1,5 @@
 package com.loayidwan;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,26 +33,25 @@ public class FileStats {
         return totalSize[0];
     }
 
-    public void getTopTenFileSizes(){
+    public List<Map.Entry<String, Long>> getTopTenFileSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
 
         List<Map.Entry<String, Long>> top10 = sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
 
-        for (Map.Entry<String, Long> entry : top10) {
-            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-        }
+//        for (Map.Entry<String, Long> entry : top10) {
+//            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+//        }
+        return top10;
     }
 
-    public void getTopTenExtSizes(){
+    public List<Map.Entry<String, Long>> getTopTenExtSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(extensionToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
 
         List<Map.Entry<String, Long>> top10 = sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
 
-        for (Map.Entry<String, Long> entry : top10) {
-            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-        }
+        return top10;
     }
 
     public Map<String, Long> getFileNameToSizeMap() {

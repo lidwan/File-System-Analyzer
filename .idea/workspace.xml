@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Added file ext. funct.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" afterDir="false" />
+    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Implemented a way to save each file and its size, each file ext. and its size.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test/iminsidetestdict.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/.iamhidden.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/fileinsidetestdic2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +90,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737713561546</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implemented a way to save each file and its size, each file ext. and its size.">
+      <option name="closed" value="true" />
+      <created>1737716653714</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737716653714</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -95,6 +106,7 @@
     <MESSAGE value="Changed main method name" />
     <MESSAGE value="Added basic dict. traversal and file size funct." />
     <MESSAGE value="Added file ext. funct." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added file ext. funct." />
+    <MESSAGE value="Implemented a way to save each file and its size, each file ext. and its size." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a way to save each file and its size, each file ext. and its size." />
   </component>
 </project>

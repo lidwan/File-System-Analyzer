@@ -1,5 +1,6 @@
 package com.loayidwan;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public class FileStats {
         extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
     }
 
+    public String getFileNameOnly(String fileName){
+        return "File name: "+fileName.substring(fileName.lastIndexOf("/")+1);
+    }
     public Map<String, Long> getFileNameToSizeMap() {
         return fileNameToSizeMap;
     }

@@ -18,7 +18,8 @@ public class FileScanner {
                 try {
                     if (Files.isRegularFile(file)) {
                         long size = Files.size(file);
-                        fileStats.addFile(file.getFileName().toString(), size);
+                        fileStats.addFile(file.toAbsolutePath().toString(), size);
+                        System.out.println(fileStats.getFileNameOnly(file.toString()));
                     }
                 }
                 catch (IOException e) {

@@ -23,7 +23,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.loayidwan.Main</mainClass>
+                            <mainClass>com.loayidwan.FileSystemAnalyzer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

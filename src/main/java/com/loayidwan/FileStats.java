@@ -23,6 +23,14 @@ public class FileStats {
     public String getFileNameOnly(String fileName){
         return "File name: "+fileName.substring(fileName.lastIndexOf("/")+1);
     }
+
+    public long getTotalDictSize(){
+        final long[] totalSize = {0};
+        extensionToSizeMap.forEach((extention, size) -> {
+            totalSize[0]+=size;
+        });
+        return totalSize[0];
+    }
     public Map<String, Long> getFileNameToSizeMap() {
         return fileNameToSizeMap;
     }

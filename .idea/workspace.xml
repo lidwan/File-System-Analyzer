@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Implemented a way to save each file and its size, each file ext. and its size.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test/iminsidetestdict.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/.iamhidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/fileinsidetestdic2.txt" afterDir="false" />
+    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Changed fileName in map to also include abs path, added a method to access fileNameOnly">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/diffext.hello" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileSystemAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileSystemAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737716653714</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changed fileName in map to also include abs path, added a method to access fileNameOnly">
+      <option name="closed" value="true" />
+      <created>1737718620830</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737718620830</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -107,6 +114,7 @@
     <MESSAGE value="Added basic dict. traversal and file size funct." />
     <MESSAGE value="Added file ext. funct." />
     <MESSAGE value="Implemented a way to save each file and its size, each file ext. and its size." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented a way to save each file and its size, each file ext. and its size." />
+    <MESSAGE value="Changed fileName in map to also include abs path, added a method to access fileNameOnly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed fileName in map to also include abs path, added a method to access fileNameOnly" />
   </component>
 </project>

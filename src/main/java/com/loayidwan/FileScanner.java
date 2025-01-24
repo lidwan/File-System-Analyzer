@@ -27,6 +27,7 @@ public class FileScanner {
                 }
             });
             System.out.println(fileStats);
+            System.out.println(fileStats.getTotalDictSize());
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
         }

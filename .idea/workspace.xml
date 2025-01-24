@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Changed fileName in map to also include abs path, added a method to access fileNameOnly">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test/testdic2/diffext.hello" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" afterDir="false" />
+    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Renamed unused param.">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileSystemAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileSystemAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +101,31 @@
       <option name="project" value="LOCAL" />
       <updated>1737718620830</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added user specified dict.">
+      <option name="closed" value="true" />
+      <created>1737720147689</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737720147689</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added funct. for total dict. size">
+      <option name="closed" value="true" />
+      <created>1737720195453</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737720195453</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Renamed unused param.">
+      <option name="closed" value="true" />
+      <created>1737720265383</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1737720265383</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -115,6 +135,9 @@
     <MESSAGE value="Added file ext. funct." />
     <MESSAGE value="Implemented a way to save each file and its size, each file ext. and its size." />
     <MESSAGE value="Changed fileName in map to also include abs path, added a method to access fileNameOnly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed fileName in map to also include abs path, added a method to access fileNameOnly" />
+    <MESSAGE value="Added user specified dict." />
+    <MESSAGE value="Added funct. for total dict. size" />
+    <MESSAGE value="Renamed unused param." />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed unused param." />
   </component>
 </project>

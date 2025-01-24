@@ -27,9 +27,7 @@ public class FileStats {
 
     public long getTotalDictSize(){
         final long[] totalSize = {0};
-        extensionToSizeMap.forEach((_, size) -> {
-            totalSize[0]+=size;
-        });
+        extensionToSizeMap.forEach((_, size) -> totalSize[0]+=size);
         return totalSize[0];
     }
 
@@ -37,21 +35,14 @@ public class FileStats {
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
 
-        List<Map.Entry<String, Long>> top10 = sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
-
-//        for (Map.Entry<String, Long> entry : top10) {
-//            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-//        }
-        return top10;
+        return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
     public List<Map.Entry<String, Long>> getTopTenExtSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(extensionToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
 
-        List<Map.Entry<String, Long>> top10 = sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
-
-        return top10;
+        return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
     public Map<String, Long> getFileNameToSizeMap() {

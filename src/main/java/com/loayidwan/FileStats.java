@@ -26,7 +26,7 @@ public class FileStats {
 
     public long getTotalDictSize(){
         final long[] totalSize = {0};
-        extensionToSizeMap.forEach((extention, size) -> {
+        extensionToSizeMap.forEach((_, size) -> {
             totalSize[0]+=size;
         });
         return totalSize[0];

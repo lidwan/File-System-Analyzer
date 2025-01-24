@@ -16,8 +16,11 @@ public class FileScanner {
                 try {
                     if (Files.isRegularFile(file)) {
                         long size = Files.size(file);
-                        System.out.println("Size of file "+file+" "+size/1024+" KB");
-                        }
+                        System.out.println("File ext. "+ FileUtils.getFileExtension(file.toString()));
+
+                        System.out.println("Size of file "+file.getFileName()+" "+size/1024+" KB");
+                        System.out.println(" ");
+                    }
                 }
                 catch (IOException e) {
                     System.err.println("Error reading file: " + file);

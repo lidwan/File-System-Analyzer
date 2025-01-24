@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Added basic dict. traversal and file size funct.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileUtils.java" afterDir="false" />
+    <list default="true" id="8656b1bf-ac70-4cdf-bc02-d2d5b8930f66" name="Changes" comment="Added file ext. funct.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileStats.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/loayidwan/FileScanner.java" afterDir="false" />
     </list>
@@ -79,13 +79,22 @@
       <option name="project" value="LOCAL" />
       <updated>1737712618843</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added file ext. funct.">
+      <option name="closed" value="true" />
+      <created>1737713561546</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737713561546</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="Changed main method name" />
     <MESSAGE value="Added basic dict. traversal and file size funct." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic dict. traversal and file size funct." />
+    <MESSAGE value="Added file ext. funct." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added file ext. funct." />
   </component>
 </project>

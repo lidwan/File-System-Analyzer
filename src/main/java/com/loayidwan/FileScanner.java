@@ -12,21 +12,20 @@ public class FileScanner {
 
     public void scan() {
         try {
+            FileStats fileStats = new FileStats();
+
             Files.walk(Paths.get(dictPath)).forEach(file -> {
                 try {
                     if (Files.isRegularFile(file)) {
                         long size = Files.size(file);
-                        System.out.println("File ext. "+ FileUtils.getFileExtension(file.toString()));
-
-                        System.out.println("Size of file "+file.getFileName()+" "+size/1024+" KB");
-                        System.out.println(" ");
+                        fileStats.addFile(file.getFileName().toString(), size);
                     }
                 }
                 catch (IOException e) {
                     System.err.println("Error reading file: " + file);
                 }
             });
-
+            System.out.println(fileStats);
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
         }

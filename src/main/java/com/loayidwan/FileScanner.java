@@ -27,7 +27,11 @@ public class FileScanner {
                 }
             });
             System.out.println(fileStats);
-            System.out.println(fileStats.getTotalDictSize());
+            System.out.println("Total dict size: "+fileStats.getTotalDictSize());
+            System.out.println("Top ten files and their sizes");
+            fileStats.getTopTenFileSizes();
+            System.out.println("Top ten Ext. and their sizes");
+            fileStats.getTopTenExtSizes();
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
         }

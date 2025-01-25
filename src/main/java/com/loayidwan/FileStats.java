@@ -60,7 +60,7 @@ public class FileStats {
 
     public void makeResFile(String dictPath){
         try {
-            File file = new File("RESULTS.txt");
+            File file = new File("fileAnalysisResults.txt");
 
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());

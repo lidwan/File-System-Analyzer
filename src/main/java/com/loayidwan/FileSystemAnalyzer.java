@@ -2,6 +2,7 @@ package com.loayidwan;
 
 import java.util.Scanner;
 
+
 public class FileSystemAnalyzer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -6,11 +6,14 @@ currently, the code can do the following:
 - store each file name (full absolute path) and the file's size
 - extract the extension of each file
 - store each extension type and the total size of all files using that extension
+- calculate top 10 files in size
+- calculate top 10 extensions in size
 - detect duplicate files using their hashcodes
 - store each file and its hashcode
 - store each hashcode and a list of all files with that hashcode (all duplicate files).
 ## What's next?
 - exporting results (w/ custom results)
+- human readable sizes (not just in bytes)
 - Nice GUI
 - Charts to visualize data
 - the ability to delete duplicate files

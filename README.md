@@ -11,7 +11,7 @@ currently, the code can do the following:
 - detect duplicate files using their hashcodes
 - store each file and its hashcode
 - store each hashcode and a list of all files with that hashcode (all duplicate files)
-- exporting results into a txt file
+- export results into a txt file
 ## What's next?
 - custom results (user specified)
 - human readable sizes (not just in bytes)

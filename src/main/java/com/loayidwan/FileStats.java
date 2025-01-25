@@ -97,10 +97,13 @@ public class FileStats {
     @Override
     public String toString() {
         return "FileStats{" +
-                "\nfileNameToSizeMap=\n" + fileNameToSizeMap +
-                "\nextensionToSizeMap=\n" + extensionToSizeMap +
-                "\nhashCodeToFileNameMap=\n" + hashCodeToFileNameMap +
-                "\nduplicateFilesMap=\n" + duplicateFilesMap +
+                "\n1- Each file in dict. and its size= " + fileNameToSizeMap +
+                "\n2- Each extension in  dict. and the total size of all files using the extension = " + extensionToSizeMap +
+                "\n3- Each hashcode (hashcode included only if there are duplicates) and a list of all files with the same hashcode = " + duplicateFilesMap +
+                "\n4- Top 10 Files in size and their sizes = " + getTopTenFileSizes() +
+                "\n5- Top 10 Extensions in size and their total sizes = " + getTopTenExtSizes() +
+                "\n6- Total dict size = " + getTotalDictSize() +
+                "\nNote: all sizes are in bytes"+
                 '}';
     }
 }

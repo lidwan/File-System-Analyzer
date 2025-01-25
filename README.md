@@ -18,3 +18,7 @@ currently, the code can do the following:
 - Nice GUI
 - Charts to visualize data
 - the ability to delete duplicate files
+- mapping of common extensions to file types (.jpg, .png → "Images")
+- multiple export formats (CSV or JSON)
+- multithreading
+- better error handling

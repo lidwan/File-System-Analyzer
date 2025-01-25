@@ -2,6 +2,8 @@ package com.loayidwan;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.security.NoSuchAlgorithmException;
+
 
 public class FileScanner {
     private final String dictPath;
@@ -18,11 +20,12 @@ public class FileScanner {
                 if (Files.isRegularFile(filePath)) {
                     try {
                         fileStats.addFile(filePath);
-                    } catch (IOException e) {
+                    } catch (IOException | NoSuchAlgorithmException e) {
                         throw new RuntimeException(e);
                     }
                 }
             });
+            //tmp ofc, just for dev.
             System.out.println(fileStats);
             System.out.println("Total dict size: "+fileStats.getTotalDictSize());
 

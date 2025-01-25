@@ -26,8 +26,7 @@ public class FileScanner {
                 }
             });
             //tmp ofc, just for dev.
-            System.out.println(fileStats);
-            System.out.println("Total dict size: "+fileStats.getTotalDictSize());
+            fileStats.makeResFile(dictPath);
 
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());

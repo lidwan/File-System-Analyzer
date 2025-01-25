@@ -1,23 +1,30 @@
 package com.loayidwan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.nio.file.*;
+import java.io.File;
+
 
 public class FileStats {
     private final Map<String, Long> fileNameToSizeMap;
     private final Map<String, Long> extensionToSizeMap;
+    private final Map<String, Long> hashCodeToFileNameMap;
 
     public FileStats() {
         this.fileNameToSizeMap = new HashMap<>();
         this.extensionToSizeMap = new HashMap<>();
+        this.hashCodeToFileNameMap = new HashMap<>();
     }
 
-    public void addFile(String fileName, long size){
-        String extension = FileUtils.getFileExtension(fileName);
+    public void addFile(Path filePath) throws IOException {
+        long size = Files.size(filePath);
+        String extension = FileUtils.getFileExtension(filePath.toString());
 
-        fileNameToSizeMap.put(fileName, size);
+        fileNameToSizeMap.put(filePath.toString(), size);
         extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
     }
 

@@ -14,16 +14,13 @@ public class FileScanner {
         try {
             FileStats fileStats = new FileStats();
 
-            Files.walk(Paths.get(dictPath)).forEach(file -> {
-                try {
-                    if (Files.isRegularFile(file)) {
-                        long size = Files.size(file);
-                        fileStats.addFile(file.toAbsolutePath().toString(), size);
-                        System.out.println(fileStats.getFileNameOnly(file.toString()));
+            Files.walk(Paths.get(dictPath)).forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+                    try {
+                        fileStats.addFile(filePath);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                }
-                catch (IOException e) {
-                    System.err.println("Error reading file: " + file);
                 }
             });
             System.out.println(fileStats);

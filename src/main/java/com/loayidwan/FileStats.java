@@ -52,14 +52,6 @@ public class FileStats {
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
-    public Map<String, Long> getFileNameToSizeMap() {
-        return fileNameToSizeMap;
-    }
-
-    public Map<String, Long> getExtensionToSizeMap() {
-        return extensionToSizeMap;
-    }
-
     @Override
     public String toString() {
         return "FileStats{" +

@@ -1,6 +1,7 @@
 package com.loayidwan;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,19 +22,27 @@ public class FileStats {
         this.duplicateFilesMap = new HashMap<>();
     }
 
-    public void addFile(Path filePath) throws IOException {
+    public void addFile(Path filePath) throws IOException, NoSuchAlgorithmException {
         long size = Files.size(filePath);
         String extension = FileUtils.getFileExtension(filePath.toString());
 
-        fileNameToSizeMap.put(filePath.toString(), size);
+        fileNameToSizeMap.put(filePath.toAbsolutePath().toString(), size);
         extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
 
         String hashCode = FileUtils.calcHashCode(filePath);
         if (hashCodeToFileNameMap.containsKey(hashCode)) { //duplicates detected
-            duplicateFilesMap.computeIfAbsent(hashCode, k -> new ArrayList<>()).add(filePath.toString());
+            //adds new (current) file to the list
+            duplicateFilesMap
+                    .computeIfAbsent(hashCode, _ -> new ArrayList<>())
+                    .add(filePath.toAbsolutePath().toString());
+
+            //also adds original file to list
+            duplicateFilesMap
+                    .get(hashCode)
+                    .add(hashCodeToFileNameMap.get(hashCode));
         }
         else {
-            hashCodeToFileNameMap.put(hashCode, filePath.toString());
+            hashCodeToFileNameMap.put(hashCode, filePath.toAbsolutePath().toString());
         }
     }
 

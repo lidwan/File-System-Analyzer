@@ -58,14 +58,16 @@ public class FileStats {
 
     public List<Map.Entry<String, Long>> getTopTenFileSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
-        sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
+        sortedEntries.sort((entry1, entry2) ->
+                Long.compare(entry2.getValue(), entry1.getValue()));
 
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
     public List<Map.Entry<String, Long>> getTopTenExtSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(extensionToSizeMap.entrySet());
-        sortedEntries.sort((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue()));
+        sortedEntries.sort((entry1, entry2) ->
+                Long.compare(entry2.getValue(), entry1.getValue()));
 
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
@@ -73,10 +75,10 @@ public class FileStats {
     @Override
     public String toString() {
         return "FileStats{" +
-                "fileNameToSizeMap=\n" + fileNameToSizeMap +
-                ", extensionToSizeMap=\n" + extensionToSizeMap +
-                ", hashCodeToFileNameMap=\n" + hashCodeToFileNameMap +
-                ", duplicateFilesMap=\n" + duplicateFilesMap +
+                "\nfileNameToSizeMap=\n" + fileNameToSizeMap +
+                "\nextensionToSizeMap=\n" + extensionToSizeMap +
+                "\nhashCodeToFileNameMap=\n" + hashCodeToFileNameMap +
+                "\nduplicateFilesMap=\n" + duplicateFilesMap +
                 '}';
     }
 }

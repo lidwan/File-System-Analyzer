@@ -1,5 +1,7 @@
 package com.loayidwan;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -56,6 +58,26 @@ public class FileStats {
         return totalSize[0];
     }
 
+    public void makeResFile(String dictPath){
+        try {
+            File file = new File("RESULTS.txt");
+
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+
+            // Step 3: Write to the file
+            FileWriter writer = new FileWriter(file);
+            writer.write("Result for scan on "+dictPath+": \n"+this.toString());
+            writer.close();
+
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+    }
     public List<Map.Entry<String, Long>> getTopTenFileSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) ->

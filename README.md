@@ -10,9 +10,10 @@ currently, the code can do the following:
 - calculate top 10 extensions in size
 - detect duplicate files using their hashcodes
 - store each file and its hashcode
-- store each hashcode and a list of all files with that hashcode (all duplicate files).
+- store each hashcode and a list of all files with that hashcode (all duplicate files)
+- exporting results into a txt file
 ## What's next?
-- exporting results (w/ custom results)
+- custom results (user specified)
 - human readable sizes (not just in bytes)
 - Nice GUI
 - Charts to visualize data

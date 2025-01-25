@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.nio.file.*;
-import java.io.File;
 
 
 public class FileStats {
     private final Map<String, Long> fileNameToSizeMap;
     private final Map<String, Long> extensionToSizeMap;
     private final Map<String, String> hashCodeToFileNameMap;
-    private Map<String, List<String>> duplicateFilesMap;
+    private final Map<String, List<String>> duplicateFilesMap;
 
     public FileStats() {
         this.fileNameToSizeMap = new HashMap<>();

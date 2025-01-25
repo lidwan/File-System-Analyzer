@@ -12,12 +12,14 @@ import java.io.File;
 public class FileStats {
     private final Map<String, Long> fileNameToSizeMap;
     private final Map<String, Long> extensionToSizeMap;
-    private final Map<String, Long> hashCodeToFileNameMap;
+    private final Map<String, String> hashCodeToFileNameMap;
+    private Map<String, List<String>> duplicateFilesMap;
 
     public FileStats() {
         this.fileNameToSizeMap = new HashMap<>();
         this.extensionToSizeMap = new HashMap<>();
         this.hashCodeToFileNameMap = new HashMap<>();
+        this.duplicateFilesMap = new HashMap<>();
     }
 
     public void addFile(Path filePath) throws IOException {
@@ -26,6 +28,14 @@ public class FileStats {
 
         fileNameToSizeMap.put(filePath.toString(), size);
         extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
+
+        String hashCode = FileUtils.calcHashCode(filePath);
+        if (hashCodeToFileNameMap.containsKey(hashCode)) { //duplicates detected
+            duplicateFilesMap.computeIfAbsent(hashCode, k -> new ArrayList<>()).add(filePath.toString());
+        }
+        else {
+            hashCodeToFileNameMap.put(hashCode, filePath.toString());
+        }
     }
 
     public String getFileNameOnly(String fileName){
@@ -55,8 +65,10 @@ public class FileStats {
     @Override
     public String toString() {
         return "FileStats{" +
-                "fileNameToSizeMap=" + fileNameToSizeMap +
-                ", extensionToSizeMap=" + extensionToSizeMap +
+                "fileNameToSizeMap=\n" + fileNameToSizeMap +
+                ", extensionToSizeMap=\n" + extensionToSizeMap +
+                ", hashCodeToFileNameMap=\n" + hashCodeToFileNameMap +
+                ", duplicateFilesMap=\n" + duplicateFilesMap +
                 '}';
     }
 }

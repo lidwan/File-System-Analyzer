@@ -7,4 +7,5 @@ FileStats{
 5- Top 10 Extensions in size and their total sizes = [txt=767262, hello=169, mkv=18, mp4=12, jpg=0, Unknown=0, png=0]
 6- Total dict size = 767461
 7- Extensions size grouped by common extension types: {Unknown=169, Documents=767262, Images=0, Videos=30}
+8- Top 10 grouped common extension and their sizes: [Documents=767262, Unknown=169, Videos=30, Images=0]
 Note: all sizes are in bytes}

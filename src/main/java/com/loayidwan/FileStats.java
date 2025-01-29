@@ -28,26 +28,25 @@ public class FileStats {
         this.commonExtensionsGrouped = new HashMap<>();
 
         //Thx to AI, this didn't take forever to compile.
-        commonExtensionsGrouped.put("Images", Arrays.asList(".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg", ".ico", ".raw"));
-        commonExtensionsGrouped.put("Documents", Arrays.asList(".pdf", ".doc", ".docx", ".txt", ".rtf", ".odt", ".xls", ".xlsx", ".ppt", ".pptx", ".csv", ".md", ".tex", ".epub", ".pages", ".numbers", ".key"));
-        commonExtensionsGrouped.put("Videos", Arrays.asList(".mp4", ".avi", ".mkv", ".mov", ".wmv", ".flv", ".webm", ".mpeg", ".3gp", ".vob", ".m4v", ".ogv"));
-        commonExtensionsGrouped.put("Audio", Arrays.asList(".mp3", ".wav", ".aac", ".flac", ".ogg", ".wma", ".m4a", ".aiff", ".opus", ".midi"));
-        commonExtensionsGrouped.put("Archives", Arrays.asList(".zip", ".rar", ".7z", ".tar", ".gz", ".bz2", ".xz", ".iso", ".dmg", ".pkg"));
-        commonExtensionsGrouped.put("Executables", Arrays.asList(".exe", ".msi", ".dmg", ".apk", ".app", ".bat", ".sh", ".jar", ".bin", ".deb", ".rpm"));
-        commonExtensionsGrouped.put("Code Files", Arrays.asList(".java", ".py", ".c", ".cpp", ".js", ".html", ".css", ".php", ".rb", ".go", ".swift", ".kt", ".ts", ".sh", ".pl", ".lua", ".sql", ".json", ".xml", ".yml", ".yaml"));
-        commonExtensionsGrouped.put("Databases", Arrays.asList(".sql", ".db", ".sqlite", ".mdb", ".accdb", ".dbf", ".csv", ".json", ".xml"));
-        commonExtensionsGrouped.put("Fonts", Arrays.asList(".ttf", ".otf", ".woff", ".woff2", ".eot", ".fon"));
-        commonExtensionsGrouped.put("System Files", Arrays.asList(".dll", ".sys", ".ini", ".cfg", ".log", ".bak", ".tmp", ".dat", ".inf", ".reg"));
-        commonExtensionsGrouped.put("3D Models", Arrays.asList(".obj", ".fbx", ".stl", ".dae", ".blend", ".3ds", ".max", ".ma", ".mb"));
-        commonExtensionsGrouped.put("Virtual Machines", Arrays.asList(".vmdk", ".vdi", ".vhd", ".ova", ".ovf", ".qcow2"));
-        commonExtensionsGrouped.put("E-books", Arrays.asList(".epub", ".mobi", ".azw", ".azw3", ".fb2", ".ibooks"));
-        commonExtensionsGrouped.put("Spreadsheets", Arrays.asList(".xls", ".xlsx", ".ods", ".csv", ".numbers"));
-        commonExtensionsGrouped.put("Presentations", Arrays.asList(".ppt", ".pptx", ".odp", ".key"));
-        commonExtensionsGrouped.put("Configuration Files", Arrays.asList(".ini", ".cfg", ".conf", ".yml", ".yaml", ".json", ".xml", ".properties"));
-        commonExtensionsGrouped.put("Backup Files", Arrays.asList(".bak", ".old", ".tmp", ".arc", ".tar", ".gz"));
-        commonExtensionsGrouped.put("Disk Images", Arrays.asList(".iso", ".img", ".dmg", ".vhd", ".vdi"));
-        commonExtensionsGrouped.put("Web Files", Arrays.asList(".html", ".htm", ".css", ".js", ".php", ".asp", ".jsp", ".aspx", ".xml", ".json"));
-
+        commonExtensionsGrouped.put("Images", Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "ico", "raw"));
+        commonExtensionsGrouped.put("Documents", Arrays.asList("pdf", "doc", "docx", "txt", "rtf", "odt", "xls", "xlsx", "ppt", "pptx", "csv", "md", "tex", "epub", "pages", "numbers", "key"));
+        commonExtensionsGrouped.put("Videos", Arrays.asList("mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "mpeg", "3gp", "vob", "m4v", "ogv"));
+        commonExtensionsGrouped.put("Audio", Arrays.asList("mp3", "wav", "aac", "flac", "ogg", "wma", "m4a", "aiff", "opus", "midi"));
+        commonExtensionsGrouped.put("Archives", Arrays.asList("zip", "rar", "7z", "tar", "gz", "bz2", "xz", "iso", "dmg", "pkg"));
+        commonExtensionsGrouped.put("Executables", Arrays.asList("exe", "msi", "dmg", "apk", "app", "bat", "sh", "jar", "bin", "deb", "rpm"));
+        commonExtensionsGrouped.put("Code Files", Arrays.asList("java", "py", "c", "cpp", "js", "html", "css", "php", "rb", "go", "swift", "kt", "ts", "sh", "pl", "lua", "sql", "json", "xml", "yml", "yaml"));
+        commonExtensionsGrouped.put("Databases", Arrays.asList("sql", "db", "sqlite", "mdb", "accdb", "dbf", "csv", "json", "xml"));
+        commonExtensionsGrouped.put("Fonts", Arrays.asList("ttf", "otf", "woff", "woff2", "eot", "fon"));
+        commonExtensionsGrouped.put("System Files", Arrays.asList("dll", "sys", "ini", "cfg", "log", "bak", "tmp", "dat", "inf", "reg"));
+        commonExtensionsGrouped.put("3D Models", Arrays.asList("obj", "fbx", "stl", "dae", "blend", "3ds", "max", "ma", "mb"));
+        commonExtensionsGrouped.put("Virtual Machines", Arrays.asList("vmdk", "vdi", "vhd", "ova", "ovf", "qcow2"));
+        commonExtensionsGrouped.put("E-books", Arrays.asList("epub", "mobi", "azw", "azw3", "fb2", "ibooks"));
+        commonExtensionsGrouped.put("Spreadsheets", Arrays.asList("xls", "xlsx", "ods", "csv", "numbers"));
+        commonExtensionsGrouped.put("Presentations", Arrays.asList("ppt", "pptx", "odp", "key"));
+        commonExtensionsGrouped.put("Configuration Files", Arrays.asList("ini", "cfg", "conf", "yml", "yaml", "json", "xml", "properties"));
+        commonExtensionsGrouped.put("Backup Files", Arrays.asList("bak", "old", "tmp", "arc", "tar", "gz"));
+        commonExtensionsGrouped.put("Disk Images", Arrays.asList("iso", "img", "dmg", "vhd", "vdi"));
+        commonExtensionsGrouped.put("Web Files", Arrays.asList("html", "htm", "css", "js", "php", "asp", "jsp", "aspx", "xml", "json"));
     }
 
     public void addFile(Path filePath) throws IOException, NoSuchAlgorithmException {

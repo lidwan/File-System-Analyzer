@@ -177,7 +177,8 @@ public class FileStats {
                 "\n4- Top 10 Files in size and their sizes = " + getTopTenFileSizes() +
                 "\n5- Top 10 Extensions in size and their total sizes = " + getTopTenExtSizes() +
                 "\n6- Total dict size = " + getTotalDictSize() +
-                "\n7- Extensions size grouped by common extension types: "+ commonExtensionsGroupedToSize +
+                "\n7- Each common extension and its size "+ commonExtensionsGroupedToSize +
+                "\n8- Top 10 grouped common extension and their sizes: "+ getTopTenExtCommon() +
                 "\nNote: all sizes are in bytes"+
                 '}';
     }

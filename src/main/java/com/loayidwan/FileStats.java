@@ -78,6 +78,24 @@ public class FileStats {
             System.out.println("An error occurred.");
         }
     }
+    public void deleteDuplFiles(){
+        duplicateFilesMap.forEach((_, dupsList) ->{
+            dupsList.forEach((filePathString) ->{
+                try {
+                    if (Files.deleteIfExists(Path.of(filePathString))){
+                        deletedFilesList.add(filePathString);
+                    }
+                    else {
+                        System.err.println("File "+filePathString+ " was deleted or moved before the program could deleted it.");
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (SecurityException e){
+                    throw  new SecurityException(e);
+                }
+            });
+        });
+    }
     public List<Map.Entry<String, Long>> getTopTenFileSizes(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) ->

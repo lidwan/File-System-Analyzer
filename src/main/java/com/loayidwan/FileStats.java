@@ -153,6 +153,13 @@ public class FileStats {
 
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
+    public List<Map.Entry<String, Long>> getTopTenExtCommon(){
+        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(commonExtensionsGroupedToSize.entrySet());
+        sortedEntries.sort((entry1, entry2) ->
+                Long.compare(entry2.getValue(), entry1.getValue()));
+
+        return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
+    }
 
     //tmp for dev
     public void getDeletedFiles() {

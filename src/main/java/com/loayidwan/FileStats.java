@@ -16,12 +16,14 @@ public class FileStats {
     private final Map<String, Long> extensionToSizeMap;
     private final Map<String, String> hashCodeToFileNameMap;
     private final Map<String, List<String>> duplicateFilesMap;
+    private final List<String> deletedFilesList;
 
     public FileStats() {
         this.fileNameToSizeMap = new HashMap<>();
         this.extensionToSizeMap = new HashMap<>();
         this.hashCodeToFileNameMap = new HashMap<>();
         this.duplicateFilesMap = new HashMap<>();
+        this.deletedFilesList = new ArrayList<>();
     }
 
     public void addFile(Path filePath) throws IOException, NoSuchAlgorithmException {

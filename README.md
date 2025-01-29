@@ -12,12 +12,12 @@ currently, the code can do the following:
 - store each file and its hashcode
 - store each hashcode and a list of all files with that hashcode (all duplicate files)
 - export results into a txt file
+- the ability to delete duplicate files
 ## What's next?
 - custom results (user specified)
 - human readable sizes (not just in bytes)
 - Nice GUI
 - Charts to visualize data
-- the ability to delete duplicate files
 - mapping of common extensions to file types (.jpg, .png → "Images")
 - multiple export formats (CSV or JSON)
 - multithreading

@@ -45,5 +45,18 @@ public class FileUtils {
         }
         return hexString.toString();
     }
+
+    public static String humanReadableSize(long bytes) {
+        String[] units = {"B", "KB", "MB", "GB", "TB", "PB"};
+        int unitIndex = 0;
+        double size = bytes;
+
+        while (size >= 1024 && unitIndex < units.length - 1) {
+            size /= 1024;
+            unitIndex++;
+        }
+
+        return String.format("%.2f %s", size, units[unitIndex]);
+    }
 }
 

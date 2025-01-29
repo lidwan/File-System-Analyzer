@@ -1,7 +1,7 @@
 # File-System-Analyzer
 A File System Analyzer? Scannes directories, breaks down disk usage, detects duplicate files, and has a GUI with charts to better visualize information, and much more!
 ## Still a work in progress
-currently, the code can do the following:
+currently, the code can do the following (CLI, not GUI.. yet):
 - scan a dictionary
 - store each file name (full absolute path) and the file's size
 - extract the extension of each file

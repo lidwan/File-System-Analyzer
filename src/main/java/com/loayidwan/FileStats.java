@@ -70,7 +70,6 @@ public class FileStats {
                 System.out.println("File already exists.");
             }
 
-            // Step 3: Write to the file
             FileWriter writer = new FileWriter(file);
             writer.write("Result for scan on "+dictPath+": \n"+this.toString());
             writer.close();

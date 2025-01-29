@@ -14,7 +14,7 @@ public class FileStats {
     private final Map<String, String> hashCodeToFileNameMap;
     private final Map<String, List<String>> duplicateFilesMap;
     private final List<String> deletedFilesList;
-    private final Map<String, List<String>> commonExtensionsGroupedToSize;
+    private final Map<String, Long> commonExtensionsGroupedToSize;
     private final Map<String, List<String>> commonExtensionsGrouped;
 
 
@@ -71,6 +71,23 @@ public class FileStats {
         else {
             hashCodeToFileNameMap.put(hashCode, filePath.toAbsolutePath().toString());
         }
+
+        boolean found = false;
+
+        for (Map.Entry<String, List<String>> entry : commonExtensionsGrouped.entrySet()) {
+            if (entry.getValue().contains(extension)) {
+                commonExtensionsGroupedToSize.put(entry.getKey(),
+                        commonExtensionsGroupedToSize.getOrDefault(entry.getKey(), 0L) + size);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            commonExtensionsGroupedToSize.put("Unknown",
+                    commonExtensionsGroupedToSize.getOrDefault("Unknown", 0L) + size);
+        }
+
     }
 
     public String getFileNameOnly(String fileName){
@@ -102,6 +119,7 @@ public class FileStats {
             System.out.println("An error occurred.");
         }
     }
+
     public void deleteDuplFiles(){
         duplicateFilesMap.forEach((_, dupsList) ->{
             dupsList.forEach((filePathString) ->{
@@ -152,6 +170,7 @@ public class FileStats {
                 "\n4- Top 10 Files in size and their sizes = " + getTopTenFileSizes() +
                 "\n5- Top 10 Extensions in size and their total sizes = " + getTopTenExtSizes() +
                 "\n6- Total dict size = " + getTotalDictSize() +
+                "\n7- Extensions size grouped by common extension types: "+ commonExtensionsGroupedToSize +
                 "\nNote: all sizes are in bytes"+
                 '}';
     }

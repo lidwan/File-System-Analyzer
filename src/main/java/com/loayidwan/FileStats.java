@@ -114,6 +114,13 @@ public class FileStats {
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
+    //tmp for dev
+    public void getDeletedFiles() {
+        for (String file : deletedFilesList) {
+            System.out.println("Deleted file: "+file);
+        }
+
+    }
     @Override
     public String toString() {
         return "FileStats{" +

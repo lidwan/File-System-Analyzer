@@ -1,6 +1,6 @@
 # File-System-Analyzer
 A File System Analyzer? Scannes directories, breaks down disk usage, detects duplicate files, and has a GUI with charts to better visualize information, and much more!
-## Still a work in progress
+## What the program can currently do:
 currently, the code can do the following (CLI, not GUI.. yet):
 - scan a dictionary
 - store each file name (full absolute path) and the file's size
@@ -15,10 +15,11 @@ currently, the code can do the following (CLI, not GUI.. yet):
 - the ability to delete duplicate files
 - mapping of common extensions to file types (.jpg, .png → "Images")
 - human-readable sizes (not just in bytes)
+## What am I working on right now?
+- multithreading
 ## What's next?
 - custom results (user specified)
-- Nice GUI
+- Nice GUI (w/ JavaFX)
 - Charts to visualize data
 - multiple export formats (CSV or JSON)
-- multithreading
 - better error handling

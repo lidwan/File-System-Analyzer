@@ -64,6 +64,8 @@ public class FileStats {
         fileNameToSizeMap.put(filePath.toAbsolutePath().toString(), size);
         extensionToSizeMap.merge(extension, size, Long::sum);
 
+        totalDictSize.add(size);
+
         handleDuplicateFiles(filePath);
         handleExtensions(extension, size);
     }

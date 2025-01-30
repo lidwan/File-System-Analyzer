@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.nio.file.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.LongAdder;
 
 
 public class FileStats {
@@ -18,6 +19,8 @@ public class FileStats {
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
 
+    private final LongAdder totalDictSize;
+
 
     public FileStats() {
         this.fileNameToSizeMap = new ConcurrentHashMap<>();
@@ -27,6 +30,7 @@ public class FileStats {
         this.deletedFilesList = new ArrayList<>();
         this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
         commonExtensionsGrouped = new ConcurrentHashMap<>();
+        this.totalDictSize = new LongAdder();
 
         //Thx to AI, this didn't take forever to compile.
         //This is common extension types and what they usually mean so that the program can output extensions in a humanly readable way
@@ -109,9 +113,7 @@ public class FileStats {
     }
 
     public long getTotalDictSize(){
-        final long[] totalSize = {0};
-        extensionToSizeMap.forEach((_, size) -> totalSize[0]+=size);
-        return totalSize[0];
+        return totalDictSize.sum();
     }
 
     public void makeResFile(String dictPath){

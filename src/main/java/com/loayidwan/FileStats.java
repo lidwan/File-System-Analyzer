@@ -6,26 +6,29 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.nio.file.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class FileStats {
-    private final Map<String, Long> fileNameToSizeMap;
-    private final Map<String, Long> extensionToSizeMap;
-    private final Map<String, String> hashCodeToFileNameMap;
-    private final Map<String, List<String>> duplicateFilesMap;
+    private final ConcurrentHashMap<String, Long> fileNameToSizeMap;
+    private final ConcurrentHashMap<String, Long> extensionToSizeMap;
+    private final ConcurrentHashMap<String, String> hashCodeToFileNameMap;
+    private final ConcurrentHashMap<String, List<String>> duplicateFilesMap;
     private final List<String> deletedFilesList;
     private final Map<String, Long> commonExtensionsGroupedToSize;
     private final Map<String, List<String>> commonExtensionsGrouped;
+    private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
 
 
     public FileStats() {
-        this.fileNameToSizeMap = new HashMap<>();
-        this.extensionToSizeMap = new HashMap<>();
-        this.hashCodeToFileNameMap = new HashMap<>();
-        this.duplicateFilesMap = new HashMap<>();
+        this.fileNameToSizeMap = new ConcurrentHashMap<>();
+        this.extensionToSizeMap = new ConcurrentHashMap<>();
+        this.hashCodeToFileNameMap = new ConcurrentHashMap<>();
+        this.duplicateFilesMap = new ConcurrentHashMap<>();
         this.deletedFilesList = new ArrayList<>();
         this.commonExtensionsGroupedToSize = new HashMap<>();
         this.commonExtensionsGrouped = new HashMap<>();
+        this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
 
         //Thx to AI, this didn't take forever to compile.
         commonExtensionsGrouped.put("Images", Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "ico", "raw"));

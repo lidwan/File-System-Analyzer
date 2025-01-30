@@ -18,6 +18,7 @@ public class FileStats {
     private final Map<String, Long> commonExtensionsGroupedToSize;
     private final Map<String, List<String>> commonExtensionsGrouped;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
+    private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
 
 
     public FileStats() {
@@ -26,9 +27,8 @@ public class FileStats {
         this.hashCodeToFileNameMap = new ConcurrentHashMap<>();
         this.duplicateFilesMap = new ConcurrentHashMap<>();
         this.deletedFilesList = new ArrayList<>();
-        this.commonExtensionsGroupedToSize = new HashMap<>();
-        this.commonExtensionsGrouped = new HashMap<>();
         this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
+        commonExtensionsGrouped = new ConcurrentHashMap<>();
 
         //Thx to AI, this didn't take forever to compile.
         commonExtensionsGrouped.put("Images", Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "ico", "raw"));

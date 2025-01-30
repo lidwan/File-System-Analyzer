@@ -58,30 +58,29 @@ public class FileStats {
         String extension = FileUtils.getFileExtension(filePath.toString());
 
         fileNameToSizeMap.put(filePath.toAbsolutePath().toString(), size);
-        extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
+        extensionToSizeMap.merge(extension, size, Long::sum);
 
         handleDuplicateFiles(filePath);
         handleExtensions(extension, size);
     }
 
-    //This method calls calcHashCode to get the hashcode of the file, then checks if that file exists in hashCodeToFileNameMap
-    //AKA has this file been seen before? if it hasn't it adds it to hashCodeToFileNameMap, if it has, the method adds the file to
-    //duplicateFilesMap and only if the original file (filePath) doesn't exist in duplicateFilesMap it adds the original file as well.
+    // This method calls calcHashCode to get the hashcode of the file, then tries to add the file as the
+    // original file to duplicateFilesMap, it wasn't the original file for this hashcode then
+    // duplicates are detected, then if this is the first duplicate file for this hashcode a list is initialized
+    // and the original file is added in the list, then the current file is added.
     private void handleDuplicateFiles(Path filePath) throws NoSuchAlgorithmException {
         String hashCode = FileUtils.calcHashCode(filePath);
-        if (hashCodeToFileNameMap.containsKey(hashCode)) { //duplicates detected
-            //adds new (current) file to the list
-            duplicateFilesMap
-                    .computeIfAbsent(hashCode, _ -> new ArrayList<>())
-                    .add(filePath.toAbsolutePath().toString());
+        String currentFilePath = filePath.toAbsolutePath().toString();
 
-            //also adds original file to list
-            if (!duplicateFilesMap.get(hashCode).contains(hashCodeToFileNameMap.get(hashCode))) {
-                duplicateFilesMap.get(hashCode).add(hashCodeToFileNameMap.get(hashCode));
-            }
-        }
-        else {
-            hashCodeToFileNameMap.put(hashCode, filePath.toAbsolutePath().toString());
+        String existingFilePath = hashCodeToFileNameMap.putIfAbsent(hashCode, currentFilePath);
+
+        if (existingFilePath != null) {
+            duplicateFilesMap.computeIfAbsent(hashCode, k -> {
+                // happens once per hash
+                List<String> list = new ArrayList<>();
+                list.add(existingFilePath);
+                return list;
+            }).add(currentFilePath); // Add the current duplicate
         }
     }
 

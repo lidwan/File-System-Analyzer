@@ -56,6 +56,14 @@ public class FileStats {
         fileNameToSizeMap.put(filePath.toAbsolutePath().toString(), size);
         extensionToSizeMap.put(extension, extensionToSizeMap.getOrDefault(extension,0L)+size);
 
+        handleDuplicateFiles(filePath);
+        handleExtensions(extension, size);
+    }
+
+    //This method calls calcHashCode to get the hashcode of the file, then checks if that file exists in hashCodeToFileNameMap
+    //AKA has this file been seen before? if it hasn't it adds it to hashCodeToFileNameMap, if it has, the method adds the file to
+    //duplicateFilesMap and only if the original file (filePath) doesn't exist in duplicateFilesMap it adds the original file as well.
+    private void handleDuplicateFiles(Path filePath) throws NoSuchAlgorithmException {
         String hashCode = FileUtils.calcHashCode(filePath);
         if (hashCodeToFileNameMap.containsKey(hashCode)) { //duplicates detected
             //adds new (current) file to the list
@@ -71,7 +79,9 @@ public class FileStats {
         else {
             hashCodeToFileNameMap.put(hashCode, filePath.toAbsolutePath().toString());
         }
+    }
 
+    private void handleExtensions(String extension, long size) {
         boolean found = false;
 
         for (Map.Entry<String, List<String>> entry : commonExtensionsGrouped.entrySet()) {

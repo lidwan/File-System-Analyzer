@@ -76,9 +76,9 @@ public class FileStats {
                     .add(filePath.toAbsolutePath().toString());
 
             //also adds original file to list
-            duplicateFilesMap
-                    .get(hashCode)
-                    .add(hashCodeToFileNameMap.get(hashCode));
+            if (!duplicateFilesMap.get(hashCode).contains(hashCodeToFileNameMap.get(hashCode))) {
+                duplicateFilesMap.get(hashCode).add(hashCodeToFileNameMap.get(hashCode));
+            }
         }
         else {
             hashCodeToFileNameMap.put(hashCode, filePath.toAbsolutePath().toString());

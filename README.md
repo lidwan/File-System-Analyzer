@@ -14,7 +14,7 @@ currently, the code can do the following (CLI, not GUI.. yet):
 - export results into a txt file
 - mapping of common extensions to file types (.jpg, .png → "Images")
 - human-readable sizes (not just in bytes)
-- - multithreading
+- multithreading
 ## What am I working on right now?
 - multiple export formats (CSV or JSON)
 - better error handling

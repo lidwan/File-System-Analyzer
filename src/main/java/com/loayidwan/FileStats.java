@@ -15,8 +15,6 @@ public class FileStats {
     private final ConcurrentHashMap<String, String> hashCodeToFileNameMap;
     private final ConcurrentHashMap<String, List<String>> duplicateFilesMap;
     private final List<String> deletedFilesList;
-    private final Map<String, Long> commonExtensionsGroupedToSize;
-    private final Map<String, List<String>> commonExtensionsGrouped;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
 
@@ -100,7 +98,6 @@ public class FileStats {
             commonExtensionsGroupedToSize.put("Unknown",
                     commonExtensionsGroupedToSize.getOrDefault("Unknown", 0L) + size);
         }
-
     }
 
     public String getFileNameOnly(String fileName){

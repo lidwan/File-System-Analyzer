@@ -11,11 +11,11 @@ import java.util.concurrent.atomic.LongAdder;
 
 
 public class FileStats {
-    private final ConcurrentHashMap<String, Long> fileNameToSizeMap;
+    private final ConcurrentHashMap<Path, Long> fileNameToSizeMap;
     private final ConcurrentHashMap<String, Long> extensionToSizeMap;
     private final ConcurrentHashMap<String, String> hashCodeToFileNameMap;
-    private final ConcurrentHashMap<String, List<String>> duplicateFilesMap;
-    private final List<String> deletedFilesList;
+    private final ConcurrentHashMap<String, List<Path>> duplicateFilesMap;
+    private final List<Path> deletedFilesList;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
 
@@ -61,7 +61,7 @@ public class FileStats {
         long size = Files.size(filePath);
         String extension = FileUtils.getFileExtension(filePath.toString());
 
-        fileNameToSizeMap.put(filePath.toAbsolutePath().toString(), size);
+        fileNameToSizeMap.put(filePath, size);
         extensionToSizeMap.merge(extension, size, Long::sum);
 
         totalDictSize.add(size);
@@ -83,10 +83,10 @@ public class FileStats {
         if (existingFilePath != null) {
             duplicateFilesMap.computeIfAbsent(hashCode, k -> {
                 // happens once per hash
-                List<String> list = new ArrayList<>();
-                list.add(existingFilePath);
+                List<Path> list = new ArrayList<>();
+                list.add(Path.of(existingFilePath));
                 return list;
-            }).add(currentFilePath); // Add the current duplicate
+            }).add(Path.of(currentFilePath)); // Add the current duplicate
         }
     }
 
@@ -142,7 +142,7 @@ public class FileStats {
         duplicateFilesMap.forEach((_, dupsList) ->{
             dupsList.forEach((filePathString) ->{
                 try {
-                    if (Files.deleteIfExists(Path.of(filePathString))){
+                    if (Files.deleteIfExists(filePathString)){
                         deletedFilesList.add(filePathString);
                     }
                     else {
@@ -156,8 +156,8 @@ public class FileStats {
             });
         });
     }
-    public List<Map.Entry<String, Long>> getTopTenFileSizes(){
-        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
+    public List<Map.Entry<Path, Long>> getTopTenFileSizes(){
+        List<Map.Entry<Path, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) ->
                 Long.compare(entry2.getValue(), entry1.getValue()));
 
@@ -181,7 +181,7 @@ public class FileStats {
 
     //tmp for dev
     public void getDeletedFiles() {
-        for (String file : deletedFilesList) {
+        for (Path file : deletedFilesList) {
             System.out.println("Deleted file: "+file);
         }
 

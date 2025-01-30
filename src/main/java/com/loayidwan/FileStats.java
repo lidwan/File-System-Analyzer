@@ -15,7 +15,6 @@ public class FileStats {
     private final ConcurrentHashMap<String, Long> extensionToSizeMap;
     private final ConcurrentHashMap<String, String> hashCodeToFileNameMap;
     private final ConcurrentHashMap<String, List<Path>> duplicateFilesMap;
-    private final List<Path> deletedFilesList;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
 
@@ -27,7 +26,6 @@ public class FileStats {
         this.extensionToSizeMap = new ConcurrentHashMap<>();
         this.hashCodeToFileNameMap = new ConcurrentHashMap<>();
         this.duplicateFilesMap = new ConcurrentHashMap<>();
-        this.deletedFilesList = new ArrayList<>();
         this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
         commonExtensionsGrouped = new ConcurrentHashMap<>();
         this.totalDictSize = new LongAdder();
@@ -138,24 +136,7 @@ public class FileStats {
         }
     }
 
-    public void deleteDuplFiles(){
-        duplicateFilesMap.forEach((_, dupsList) ->{
-            dupsList.forEach((filePathString) ->{
-                try {
-                    if (Files.deleteIfExists(filePathString)){
-                        deletedFilesList.add(filePathString);
-                    }
-                    else {
-                        System.err.println("File "+filePathString+ " was deleted or moved before the program could deleted it.");
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (SecurityException e){
-                    throw  new SecurityException(e);
-                }
-            });
-        });
-    }
+
     public List<Map.Entry<Path, Long>> getTopTenFileSizes(){
         List<Map.Entry<Path, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) ->
@@ -179,13 +160,6 @@ public class FileStats {
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
-    //tmp for dev
-    public void getDeletedFiles() {
-        for (Path file : deletedFilesList) {
-            System.out.println("Deleted file: "+file);
-        }
-
-    }
     @Override
     public String toString() {
         return "FileStats{" +

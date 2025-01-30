@@ -93,16 +93,14 @@ public class FileStats {
 
         for (Map.Entry<String, List<String>> entry : commonExtensionsGrouped.entrySet()) {
             if (entry.getValue().contains(extension)) {
-                commonExtensionsGroupedToSize.put(entry.getKey(),
-                        commonExtensionsGroupedToSize.getOrDefault(entry.getKey(), 0L) + size);
+                commonExtensionsGroupedToSize.merge(entry.getKey(), size, Long::sum);
                 found = true;
                 break;
             }
         }
 
         if (!found) {
-            commonExtensionsGroupedToSize.put("Unknown",
-                    commonExtensionsGroupedToSize.getOrDefault("Unknown", 0L) + size);
+            commonExtensionsGroupedToSize.merge("Unknown", size, Long::sum);
         }
     }
 

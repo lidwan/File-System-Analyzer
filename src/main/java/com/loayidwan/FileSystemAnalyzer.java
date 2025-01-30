@@ -1,5 +1,7 @@
 package com.loayidwan;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 
@@ -13,7 +15,12 @@ public class FileSystemAnalyzer {
         if (dict.isEmpty())
             dict = "src/main/resources";
 
-        FileScanner fileScanner = new FileScanner(dict);
-        fileScanner.scan();
+        if (Files.isDirectory(Path.of(dict))){
+            FileScanner fileScanner = new FileScanner(dict);
+            fileScanner.scan();
+        }
+        else {
+            System.err.println("String you provided is NOT a directory");
+        }
     }
 }

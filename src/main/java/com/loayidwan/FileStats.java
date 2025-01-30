@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.nio.file.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.LongAdder;
 
 
@@ -127,7 +128,42 @@ public class FileStats {
             }
 
             FileWriter writer = new FileWriter(file);
-            writer.write("Result for scan on "+dictPath+": \n"+this.toString());
+            writer.write("Result for scan on "+dictPath+": \n\n");
+
+            writer.write("- Top 10 Files and their sizes: \n");
+            AtomicInteger tmpCounter = new AtomicInteger(1);
+
+            for (Map.Entry<Path, Long> pathLongEntry : getTopTenFileSizes()) {
+                writer.write(tmpCounter + "- File name = " + pathLongEntry.getKey().getFileName() +
+                        " | File Size = " + FileUtils.humanReadableSize(pathLongEntry.getValue()) + "\n");
+                tmpCounter.getAndIncrement();
+
+            }
+
+            tmpCounter.lazySet(1);
+
+            writer.write("\n\n- Top 10 File extension types and their sizes: \n");
+            for (Map.Entry<String, Long> e : getTopTenExtCommon()) {
+                writer.write(tmpCounter + "- Extension type = " + e.getKey() +
+                        " | File Size = " + FileUtils.humanReadableSize(e.getValue()) + "\n");
+                tmpCounter.getAndIncrement();
+            }
+
+            tmpCounter.lazySet(1);
+
+            writer.write("\n\n- Duplicate Files (based on hashcode): \n");
+            for (Map.Entry<String, List<Path>> entry : duplicateFilesMap.entrySet()) {
+                List<Path> listOfDuplicateFiles = entry.getValue();
+                writer.write(tmpCounter + "- ");
+
+                for (Path duplicateFilePath : listOfDuplicateFiles) {
+                    writer.write(duplicateFilePath.getFileName() + ", ");
+                }
+                writer.write("\n");
+                tmpCounter.getAndIncrement();
+            }
+
+            writer.write("\n\n- Total directory size " + FileUtils.humanReadableSize(getTotalDictSize()));
             writer.close();
 
             System.out.println("Successfully wrote to the file.");

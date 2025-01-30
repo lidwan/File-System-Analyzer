@@ -12,14 +12,14 @@ currently, the code can do the following (CLI, not GUI.. yet):
 - store each file and its hashcode
 - store each hashcode and a list of all files with that hashcode (all duplicate files)
 - export results into a txt file
-- the ability to delete duplicate files
 - mapping of common extensions to file types (.jpg, .png → "Images")
 - human-readable sizes (not just in bytes)
+- - multithreading
 ## What am I working on right now?
-- multithreading
-## What's next?
-- custom results (user specified)
-- Nice GUI (w/ JavaFX)
-- Charts to visualize data
 - multiple export formats (CSV or JSON)
 - better error handling
+- custom results (user specified)
+## What's next?
+- Nice GUI (w/ JavaFX)
+- Charts to visualize data
+

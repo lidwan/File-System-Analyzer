@@ -3,7 +3,6 @@ package com.loayidwan;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.*;
 import java.io.FileInputStream;
 import java.io.IOException;

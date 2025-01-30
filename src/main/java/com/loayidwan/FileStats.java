@@ -29,6 +29,7 @@ public class FileStats {
         commonExtensionsGrouped = new ConcurrentHashMap<>();
 
         //Thx to AI, this didn't take forever to compile.
+        //This is common extension types and what they usually mean so that the program can output extensions in a humanly readable way
         commonExtensionsGrouped.put("Images", Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "ico", "raw"));
         commonExtensionsGrouped.put("Documents", Arrays.asList("pdf", "doc", "docx", "txt", "rtf", "odt", "xls", "xlsx", "ppt", "md", "tex", "epub", "pages", "numbers", "key"));
         commonExtensionsGrouped.put("Videos", Arrays.asList("mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "mpeg", "3gp", "vob", "m4v", "ogv"));
@@ -48,7 +49,10 @@ public class FileStats {
         commonExtensionsGrouped.put("Backup Files", Arrays.asList("bak", "old", "tmp", "arc", "tar", "gz"));
         commonExtensionsGrouped.put("Disk Images", Arrays.asList("iso", "img", "dmg"));
     }
-
+    
+    //This method takes in a file Path and adds the file path (as a string) and the file size to fileNameToSizeMap.
+    //Also calls getFileExtension to get the extension of the file and adds it and the file size to extensionToSizeMap.
+    //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and extensions respectively.
     public void addFile(Path filePath) throws IOException, NoSuchAlgorithmException {
         long size = Files.size(filePath);
         String extension = FileUtils.getFileExtension(filePath.toString());
@@ -81,6 +85,10 @@ public class FileStats {
         }
     }
 
+    //This method search in the common extensions looking to for the first cataloger of extension types to
+    //match "extension", if it finds "extension" in any category it adds it and its file size to
+    //commonExtensionsGroupedToSize and terminates.
+    //If "extension" isn't found it adds "Unknown" and the file size to commonExtensionsGroupedToSize.
     private void handleExtensions(String extension, long size) {
         boolean found = false;
 

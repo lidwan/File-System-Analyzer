@@ -146,11 +146,12 @@ public class FileStats {
             if (userChoiceForResultFile[3] == 1)
                 writeDuplicateFiles(writer, tmpCounter);
 
+            if (userChoiceForResultFile[5] == 1)
+                writeTotalNumberOfFiles(writer);
+
             if (userChoiceForResultFile[4] == 1)
                 writeTotalDictSize(writer);
 
-            if (userChoiceForResultFile[5] == 1)
-                writeTotalNumberOfFiles(writer);
 
             writer.close();
 
@@ -161,7 +162,7 @@ public class FileStats {
     }
 
     private void writeTotalNumberOfFiles(FileWriter writer) throws IOException {
-        writer.write("- Total number of files scanned: "+numberOfFiles.get()+"\n");
+        writer.write("\n- Total number of files scanned: "+numberOfFiles.get()+"\n");
     }
 
     private void writeAllFiles(AtomicInteger tmpCounter, String dictPath) throws IOException {
@@ -190,7 +191,7 @@ public class FileStats {
     }
 
     private void writeTotalDictSize(FileWriter writer) throws IOException {
-        writer.write("\n\n- Total directory size " + FileUtils.humanReadableSize(getTotalDictSize()));
+        writer.write("\n- Total directory size " + FileUtils.humanReadableSize(getTotalDictSize()));
     }
 
     private void writeDuplicateFiles(FileWriter writer, AtomicInteger tmpCounter) throws IOException {

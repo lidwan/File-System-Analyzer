@@ -60,7 +60,7 @@ public class FileStats {
         long size = Files.size(filePath);
         String extension = FileUtils.getFileExtension(filePath.toString());
 
-        fileNameToSizeMap.put(filePath, size);
+        fileNameToSizeMap.put(filePath.toAbsolutePath(), size);
         extensionToSizeMap.merge(extension, size, Long::sum);
 
         totalDictSize.add(size);

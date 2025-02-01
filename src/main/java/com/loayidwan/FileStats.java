@@ -167,6 +167,7 @@ public class FileStats {
             writer.write("\n");
             tmpCounter.getAndIncrement();
         }
+        tmpCounter.lazySet(1);
     }
 
     private void writeTopTenExtensions(FileWriter writer, AtomicInteger tmpCounter) throws IOException {

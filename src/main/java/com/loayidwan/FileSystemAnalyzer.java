@@ -9,7 +9,7 @@ public class FileSystemAnalyzer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Choose dir to analyze (Press Enter for default 'src/main/resources'): ");
+        System.out.print("Choose dir to analyze (Press Enter for default 'src/main/resources'): ");
 
         String dict = scanner.nextLine();
         if (dict.isEmpty())
@@ -17,6 +17,7 @@ public class FileSystemAnalyzer {
 
         if (Files.isDirectory(Path.of(dict))){
             FileScanner fileScanner = new FileScanner(dict);
+            System.out.println("\nScanning directory: "+dict+"\n");
             fileScanner.scan();
         }
         else {

@@ -192,7 +192,8 @@ public class FileStats {
             for (Path duplicateFilePath : listOfDuplicateFiles) {
                 writer.write(duplicateFilePath.getFileName() + ", ");
             }
-            writer.write("\n");
+            writer.write(" | Each File Size = "+FileUtils.humanReadableSize(
+                            fileNameToSizeMap.get(listOfDuplicateFiles.getFirst()))+"\n");
             tmpCounter.getAndIncrement();
         }
         tmpCounter.lazySet(1);

@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 
 public class FileUtils {
@@ -56,6 +57,46 @@ public class FileUtils {
         }
 
         return String.format("%.2f %s", size, units[unitIndex]);
+    }
+
+    public static void AskUserAboutResultFile(int[] userChoiceForResultFile) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Do you want to list all scanned files in an output file? (y,n), default: no");
+        String response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'y'){
+                userChoiceForResultFile[0] = 1;
+                response = "";
+            }
+        System.out.println("Do you want to list Top 10 files in size in the result file? (y,n), default: yes");
+        response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'n'){
+                userChoiceForResultFile[1] = 0;
+                response = "";
+            }
+        System.out.println("Do you want to list Top 10 extensions in size in the result file? (y,n), default: yes");
+        response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'n'){
+                userChoiceForResultFile[2] = 0;
+                response = "";
+            }
+        System.out.println("Do you want to list duplicate files in the result file? (y,n), default: yes");
+        response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'n'){
+                userChoiceForResultFile[3] = 0;
+                response = "";
+            }
+        System.out.println("Do you want to list total directory size in the result file? (y,n), default: yes");
+        response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'n'){
+                userChoiceForResultFile[4] = 0;
+                response = "";
+            }
     }
 }
 

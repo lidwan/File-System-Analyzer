@@ -131,6 +131,9 @@ public class FileStats {
             FileWriter writer = new FileWriter(file);
             writer.write("Result for scan on "+dictPath+": \n\n");
 
+            if (userChoiceForResultFile[0] == 1)
+                writeAllFiles(tmpCounter, dictPath);
+
             if (userChoiceForResultFile[1] == 1)
                 writeTopTenFiles(writer, tmpCounter);
 
@@ -149,6 +152,31 @@ public class FileStats {
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
         }
+    }
+
+    private void writeAllFiles(AtomicInteger tmpCounter, String dictPath) throws IOException {
+        File file = new File("aListOfAllScannedFilesAndTheirSizes.txt");
+
+        if (file.createNewFile()) {
+            System.out.println("File created: " + file.getName());
+        } else {
+            System.out.println("File "+file.getName()+" already exists.");
+        }
+
+        FileWriter writer = new FileWriter(file);
+        writer.write("Directory: "+dictPath+" \n\n");
+        writer.write("- All Files and their sizes: \n");
+        fileNameToSizeMap.forEach((filePath, size)->{
+            try {
+                writer.write(tmpCounter + "- File name = " + filePath.getFileName() +
+                        " | File Size = " + FileUtils.humanReadableSize(size) + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            tmpCounter.getAndIncrement();
+        });
+
+        tmpCounter.lazySet(1);
     }
 
     private void writeTotalDictSize(FileWriter writer) throws IOException {

@@ -3,6 +3,7 @@ package com.loayidwan;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.nio.file.*;
@@ -18,7 +19,6 @@ public class FileStats {
     private final ConcurrentHashMap<String, List<Path>> duplicateFilesMap;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
-
     private final LongAdder totalDictSize;
 
 
@@ -117,59 +117,76 @@ public class FileStats {
         return totalDictSize.sum();
     }
 
-    public void makeResFile(String dictPath){
+    public void makeResFile(String dictPath, int[] userChoiceForResultFile){
         try {
             File file = new File("fileAnalysisResults.txt");
 
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File "+file.getName()+" already exists.");
             }
-
+            
+            AtomicInteger tmpCounter = new AtomicInteger(1);
             FileWriter writer = new FileWriter(file);
             writer.write("Result for scan on "+dictPath+": \n\n");
 
-            writer.write("- Top 10 Files and their sizes: \n");
-            AtomicInteger tmpCounter = new AtomicInteger(1);
+            if (userChoiceForResultFile[1] == 1)
+                writeTopTenFiles(writer, tmpCounter);
 
-            for (Map.Entry<Path, Long> pathLongEntry : getTopTenFileSizes()) {
-                writer.write(tmpCounter + "- File name = " + pathLongEntry.getKey().getFileName() +
-                        " | File Size = " + FileUtils.humanReadableSize(pathLongEntry.getValue()) + "\n");
-                tmpCounter.getAndIncrement();
+            if (userChoiceForResultFile[2] == 1)
+                writeTopTenExtensions(writer, tmpCounter);
 
-            }
+            if (userChoiceForResultFile[3] == 1)
+                writeDuplicateFiles(writer, tmpCounter);
 
-            tmpCounter.lazySet(1);
+            if (userChoiceForResultFile[4] == 1)
+                writeTotalDictSize(writer);
 
-            writer.write("\n\n- Top 10 File extension types and their sizes: \n");
-            for (Map.Entry<String, Long> e : getTopTenExtCommon()) {
-                writer.write(tmpCounter + "- Extension type = " + e.getKey() +
-                        " | File Size = " + FileUtils.humanReadableSize(e.getValue()) + "\n");
-                tmpCounter.getAndIncrement();
-            }
-
-            tmpCounter.lazySet(1);
-
-            writer.write("\n\n- Duplicate Files (based on hashcode): \n");
-            for (Map.Entry<String, List<Path>> entry : duplicateFilesMap.entrySet()) {
-                List<Path> listOfDuplicateFiles = entry.getValue();
-                writer.write(tmpCounter + "- ");
-
-                for (Path duplicateFilePath : listOfDuplicateFiles) {
-                    writer.write(duplicateFilePath.getFileName() + ", ");
-                }
-                writer.write("\n");
-                tmpCounter.getAndIncrement();
-            }
-
-            writer.write("\n\n- Total directory size " + FileUtils.humanReadableSize(getTotalDictSize()));
             writer.close();
 
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
         }
+    }
+
+    private void writeTotalDictSize(FileWriter writer) throws IOException {
+        writer.write("\n\n- Total directory size " + FileUtils.humanReadableSize(getTotalDictSize()));
+    }
+
+    private void writeDuplicateFiles(FileWriter writer, AtomicInteger tmpCounter) throws IOException {
+        writer.write("\n\n- Duplicate Files (based on hashcode): \n");
+        for (Map.Entry<String, List<Path>> entry : duplicateFilesMap.entrySet()) {
+            List<Path> listOfDuplicateFiles = entry.getValue();
+            writer.write(tmpCounter + "- ");
+
+            for (Path duplicateFilePath : listOfDuplicateFiles) {
+                writer.write(duplicateFilePath.getFileName() + ", ");
+            }
+            writer.write("\n");
+            tmpCounter.getAndIncrement();
+        }
+    }
+
+    private void writeTopTenExtensions(FileWriter writer, AtomicInteger tmpCounter) throws IOException {
+        writer.write("\n\n- Top 10 File extension types and their sizes: \n");
+        for (Map.Entry<String, Long> e : getTopTenExtCommon()) {
+            writer.write(tmpCounter + "- Extension type = " + e.getKey() +
+                    " | File Size = " + FileUtils.humanReadableSize(e.getValue()) + "\n");
+            tmpCounter.getAndIncrement();
+        }
+        tmpCounter.lazySet(1);
+    }
+
+    private void writeTopTenFiles(FileWriter writer, AtomicInteger tmpCounter) throws IOException {
+        writer.write("- Top 10 Files and their sizes: \n");
+        for (Map.Entry<Path, Long> pathLongEntry : getTopTenFileSizes()) {
+            writer.write(tmpCounter + "- File name = " + pathLongEntry.getKey().getFileName() +
+                    " | File Size = " + FileUtils.humanReadableSize(pathLongEntry.getValue()) + "\n");
+            tmpCounter.getAndIncrement();
+        }
+        tmpCounter.lazySet(1);
     }
 
 

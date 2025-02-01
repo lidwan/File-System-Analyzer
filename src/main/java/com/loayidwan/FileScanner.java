@@ -40,6 +40,13 @@ public class FileScanner {
 
             // Stop accepting new tasks
             executor.shutdown();
+
+            int[] userChoiceForResultFile = new int[]{0,1,1,1,1};
+            FileUtils.AskUserAboutResultFile(userChoiceForResultFile); //asking the user to customize results file
+                                                                    // while scanning continues.
+            if (!executor.isTerminated())
+                System.out.println("Still scanning "+dictPath+". Please wait...");
+
             try {
                 // Wait indefinitely for existing tasks to finish
                 executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
@@ -49,7 +56,7 @@ public class FileScanner {
             }
 
             //tmp ofc, just for dev.
-            fileStats.makeResFile(dictPath);
+            fileStats.makeResFile(dictPath, userChoiceForResultFile);
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
         }

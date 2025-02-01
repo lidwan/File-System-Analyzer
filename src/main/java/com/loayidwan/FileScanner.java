@@ -41,7 +41,7 @@ public class FileScanner {
             // Stop accepting new tasks
             executor.shutdown();
 
-            int[] userChoiceForResultFile = new int[]{0,1,1,1,1};
+            int[] userChoiceForResultFile = new int[]{0,1,1,1,1,1};
             FileUtils.AskUserAboutResultFile(userChoiceForResultFile); //asking the user to customize results file
                                                                     // while scanning continues.
             if (!executor.isTerminated())

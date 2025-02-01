@@ -20,6 +20,7 @@ public class FileStats {
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
     private final LongAdder totalDictSize;
+    private final AtomicInteger numberOfFiles;
 
 
     public FileStats() {
@@ -30,6 +31,7 @@ public class FileStats {
         this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
         commonExtensionsGrouped = new ConcurrentHashMap<>();
         this.totalDictSize = new LongAdder();
+        numberOfFiles = new AtomicInteger(0);
 
         //Thx to AI, this didn't take forever to compile.
         //This is common extension types and what they usually mean so that the program can output extensions in a humanly readable way
@@ -64,6 +66,7 @@ public class FileStats {
         extensionToSizeMap.merge(extension, size, Long::sum);
 
         totalDictSize.add(size);
+        numberOfFiles.addAndGet(1);
 
         handleDuplicateFiles(filePath);
         handleExtensions(extension, size);
@@ -146,12 +149,19 @@ public class FileStats {
             if (userChoiceForResultFile[4] == 1)
                 writeTotalDictSize(writer);
 
+            if (userChoiceForResultFile[5] == 1)
+                writeTotalNumberOfFiles(writer);
+
             writer.close();
 
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
         }
+    }
+
+    private void writeTotalNumberOfFiles(FileWriter writer) throws IOException {
+        writer.write("- Total number of files scanned: "+numberOfFiles.get()+"\n");
     }
 
     private void writeAllFiles(AtomicInteger tmpCounter, String dictPath) throws IOException {

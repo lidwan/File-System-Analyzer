@@ -97,6 +97,13 @@ public class FileUtils {
                 userChoiceForResultFile[4] = 0;
                 response = "";
             }
+        System.out.println("Do you want to list total number of scanned files in the result file? (y,n), default: yes");
+        response = scanner.nextLine();
+        if (!response.isEmpty())
+            if (response.toLowerCase().charAt(0) == 'n'){
+                userChoiceForResultFile[5] = 0;
+                response = "";
+            }
     }
 }
 

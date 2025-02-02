@@ -17,8 +17,8 @@ currently, the code can do the following (CLI, not GUI.. yet):
 - multithreading
 - custom results (user specified)
 ## What am I working on right now?
-- better error handling
-## What's next?
 - Nice GUI (w/ JavaFX)
+## What's next?
+- better error handling
 - Charts to visualize data
 

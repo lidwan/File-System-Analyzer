@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutY="26.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" text="Select Directory to scan" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="filePickerButton" mnemonicParsing="false" text="Click here to open file picker">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="selectedDirLabel" prefHeight="21.0" prefWidth="472.0" text="Selected Directory: &quot;&quot;" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Customize the Results File">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="224.0">
+               <children>
+                  <VBox alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="338.0" spacing="25.0">
+                     <children>
+                        <CheckBox mnemonicParsing="false" selected="true" text="Include Top 10 Files in size" textFill="WHITE" />
+                        <CheckBox mnemonicParsing="false" selected="true" text="Include Top 10 Extensions in size" textFill="WHITE" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="65.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="338.0" spacing="4.0">
+                     <children>
+                        <CheckBox mnemonicParsing="false" selected="true" text="Include Duplicate files and their sizes" textFill="WHITE" />
+                        <CheckBox minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" textFill="WHITE" wrapText="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <CheckBox mnemonicParsing="false" selected="true" text="Show a window showing progress" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </CheckBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Start the Scan">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

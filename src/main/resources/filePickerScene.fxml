@@ -63,7 +63,7 @@
             </CheckBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Start the Scan">
+                  <Button mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan">
                      <font>
                         <Font size="26.0" />
                      </font>

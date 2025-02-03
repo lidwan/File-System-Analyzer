@@ -2,9 +2,13 @@ Label {
     -fx-text-Fill: "white";
 
 }
-AnchorPane {
+AnchorPane{
     -fx-background-color: "black";
 }
-#selectedDirLabel, #titleSelectDirToScan, #filePickerButton,#filePickerCont{
+#listView {
+    -fx-background-color: #2e2b2b;
+    -fx-text-Fill: "white";
+}
+#directoryLabel, #titleSelectDirToScan, #filePickerButton,#filePickerCont, #processingDirTitle{
     -fx-alignment: center;
 }

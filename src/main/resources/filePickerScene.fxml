@@ -32,7 +32,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Customize the Results File">
+            <Label text="Customize the Results File (for default, keep unchanged):">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

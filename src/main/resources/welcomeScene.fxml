@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="welcomeScene" maxHeight="563.0" maxWidth="861.0" minHeight="563.0" minWidth="861.0" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.welcomeSceneController">
+<AnchorPane id="welcomeScene" maxHeight="563.0" maxWidth="861.0" minHeight="563.0" minWidth="861.0" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.WelcomeSceneController">
    <children>
       <VBox alignment="CENTER" layoutX="20.0" layoutY="74.0" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="label" onMouseClicked="#dosmthn" prefHeight="35.0" prefWidth="549.0" text="Welcome to File System Analyzer!" textAlignment="CENTER">
+            <Label fx:id="label" prefHeight="35.0" prefWidth="549.0" text="Welcome to File System Analyzer!" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
             <Label text="A Java-based file analyzer that scans a directory,&#10;retrieves file details (size, extension type, hash for duplicates),&#10;and generates a results file for the user." textAlignment="CENTER" />
-            <Button mnemonicParsing="false" text="Click here to start">
+            <Button mnemonicParsing="false" onAction="#switchToScene2" text="Click here to start">
                <font>
                   <Font size="26.0" />
                </font>

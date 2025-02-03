@@ -17,8 +17,6 @@ public class FileSystemAnalyzerGUI extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("File System Analyzer | Loay Idwan");
-        String cssFile = getClass().getResource("/FileSystemAnalyzerStyles.css").toExternalForm();
-        scene.getStylesheets().add(cssFile);
         stage.show();
     }
 

@@ -1,0 +1,10 @@
+Label {
+    -fx-text-Fill: "white";
+
+}
+AnchorPane {
+    -fx-background-color: "black";
+}
+#selectedDirLabel, #titleSelectDirToScan, #filePickerButton,#filePickerCont{
+    -fx-alignment: center;
+}

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,6 +28,8 @@ public class WelcomeSceneController {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace(); // Prints exact error
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
+            alert.showAndWait();
         }
 
     }

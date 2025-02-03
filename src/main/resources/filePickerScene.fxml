@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
    <children>
       <VBox alignment="CENTER" layoutY="26.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,14 +20,14 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="filePickerButton" mnemonicParsing="false" text="Click here to open file picker">
+                  <Button fx:id="filePickerButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Click here to open file picker">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="selectedDirLabel" prefHeight="21.0" prefWidth="472.0" text="Selected Directory: &quot;&quot;" textAlignment="CENTER">
+            <Label fx:id="directoryLabel" prefHeight="21.0" prefWidth="853.0" text="Selected Directory: &quot; " textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>

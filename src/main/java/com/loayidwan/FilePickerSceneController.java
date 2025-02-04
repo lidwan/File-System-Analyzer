@@ -36,6 +36,7 @@ public class FilePickerSceneController {
     private void openDirectoryPicker() throws IOException {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a Directory");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
         // Open the directory chooser
         File selectedDirectory = directoryChooser.showDialog(new Stage());

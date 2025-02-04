@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -17,6 +18,19 @@ public class FilePickerSceneController {
     @FXML
     private Label directoryLabel;
     private String dirName;
+    private String absulotePathOfDir;
+
+    @FXML
+    private CheckBox topTenFilesCheckBox;
+    @FXML
+    private CheckBox topTenExtensionsCheckBox;
+    @FXML
+    private CheckBox duplicateFilesCheckBox;
+    @FXML
+    private CheckBox totalFileCountAndDirSizeCheckBox;
+
+
+    private int[] userChoiceForResultFile = new int[]{1,1,1,1};
 
     @FXML
     private void openDirectoryPicker() throws IOException {
@@ -25,11 +39,11 @@ public class FilePickerSceneController {
 
         // Open the directory chooser
         File selectedDirectory = directoryChooser.showDialog(new Stage());
-
         // Check if a directory was selected
         if (selectedDirectory != null) {
             dirName = selectedDirectory.getName();
-            directoryLabel.setText(directoryLabel.getText() +selectedDirectory+ "\"");
+            absulotePathOfDir = selectedDirectory.getAbsolutePath();
+            directoryLabel.setText("Selected directory: \"" +selectedDirectory+ "\"");
 
         } else {
             directoryLabel.setText("No directory selected.");
@@ -38,17 +52,41 @@ public class FilePickerSceneController {
 
     public void switchToScene3(javafx.event.ActionEvent event) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/processingDirectoryScene.fxml"));
-            Parent root = loader.load();
+            if (absulotePathOfDir != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/processingDirectoryScene.fxml"));
+                Parent root = loader.load();
 
-            ProcessingDirectorySceneController processingDirectorySceneController = loader.getController();
-            processingDirectorySceneController.setProcessingDirTitle(dirName);
+                ProcessingDirectorySceneController processingDirectorySceneController = loader.getController();
 
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
+                //passing directory name to next scene
+                processingDirectorySceneController.setProcessingDirTitle(dirName);
 
-            stage.setScene(scene);
-            stage.show();
+                //modify user choice if not default selected
+                if (!topTenFilesCheckBox.isSelected()) {userChoiceForResultFile[0] = 0;}
+                if (!topTenExtensionsCheckBox.isSelected()) {userChoiceForResultFile[1] = 0;}
+                if (!duplicateFilesCheckBox.isSelected()) {userChoiceForResultFile[2] = 0;}
+                if (!totalFileCountAndDirSizeCheckBox.isSelected()) {userChoiceForResultFile[3] = 0;}
+
+                //passing user choices to next scene
+                processingDirectorySceneController.setUserChoice(userChoiceForResultFile);
+
+                //passing the absolute path of dir to next scene
+                processingDirectorySceneController.setabsulotePathOfDir(absulotePathOfDir);
+
+
+                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+
+                stage.setScene(scene);
+                stage.show();
+
+                //start scanning directory
+                processingDirectorySceneController.startProcessingDirectory();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You did NOT choose a directory, Please choose a dir before attempting to start scanning ");
+                alert.showAndWait();
+            }
         } catch (Exception e) {
             e.printStackTrace(); // Prints exact error
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());

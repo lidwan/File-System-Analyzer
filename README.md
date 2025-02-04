@@ -17,10 +17,7 @@ A File System Analyzer? Scannes directories, breaks down disk usage, detects dup
 - custom results (user specified)
 - Nice GUI (w/ JavaFX)
 ## What am I working on right now?
-- Finishing up style for GUI
 - Getting File processing javaFX scene working (should show file names as each file gets processed in GUI)
-- Move all styling to CSS file instead of mixing style between CSS file and FXML files
-- Implement Final Scene (user choosees where to save results file, has rest button to scan a new dir)
 ## What's next?
 - better error handling
 - Charts to visualize data

@@ -1,14 +1,41 @@
 Label {
     -fx-text-Fill: "white";
-
 }
+
 AnchorPane{
     -fx-background-color: "black";
 }
+
 #listView {
     -fx-background-color: #2e2b2b;
     -fx-text-Fill: "white";
 }
-#directoryLabel, #titleSelectDirToScan, #filePickerButton,#filePickerCont, #processingDirTitle{
+
+#directoryLabel, #titleSelectDirToScan, #filePickerButton,
+#filePickerCont, #processingDirTitle, #saveResFileTitle,
+#restartButtonCont, #chooseWhereCont, #bottomContForSaveRes2,
+#saveResFileTitileCont, #saveFileLocation{
     -fx-alignment: center;
+}
+
+#restartButtonCont{
+    -fx-padding: 100 0 50 0;
+    -fx-font-size: 18;
+ }
+
+#saveResFileTitle {
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+}
+
+#bottomContForSaveRes2{
+    -fx-spacing: 30;
+}
+
+#saveFileLocation{
+    -fx-font-size: 16;
+}
+
+#whereToSaveButton {
+    -fx-font-size: 14;
 }

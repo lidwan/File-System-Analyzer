@@ -16,8 +16,12 @@ currently, the code can do the following (CLI, not GUI.. yet):
 - human-readable sizes (not just in bytes)
 - multithreading
 - custom results (user specified)
-## What am I working on right now?
 - Nice GUI (w/ JavaFX)
+## What am I working on right now?
+- Finishing up style for GUI
+- Getting File processing javaFX scene working (should show file names as each file gets processed in GUI)
+- Move all styling to CSS file instead of mixing style between CSS file and FXML files
+- Implement Final Scene (user choosees where to save results file, has rest button to scan a new dir)
 ## What's next?
 - better error handling
 - Charts to visualize data

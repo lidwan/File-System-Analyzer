@@ -81,11 +81,8 @@ public class ProcessingDirectorySceneController {
             //start scan on a new thread, UI remains responsive
             fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
                 Platform.runLater(() -> {
-                    // Format: "Processed: filename.txt - 1.23 MB"
-                    String entry = String.format("Processed: %s - %s",
-                            fileName,
-                            FileUtils.humanReadableSize(size)
-                    );
+                    // Format: "Processed: filename.txt"
+                    String entry = String.format("Processed: %s,",fileName);
                     fileItems.add(entry);
                 });
             });

@@ -1,4 +1,4 @@
-Label {
+Label, CheckBox {
     -fx-text-Fill: "white";
 }
 
@@ -36,6 +36,33 @@ AnchorPane{
     -fx-font-size: 16;
 }
 
+#processingDirTitle {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+}
+
 #whereToSaveButton {
     -fx-font-size: 14;
+}
+
+#titleSelectDirToScan{
+    -fx-font-size: 27;
+    -fx-font-weight: bold;
+}
+
+#filePickerButton{
+    -fx-font-size: 17;
+}
+
+#directoryLabel {
+    -fx-font-size: 18;
+}
+
+#custTheResFileTEXT {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#startScanButton {
+    -fx-font-size: 26;
 }

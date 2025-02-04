@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
    <children>
@@ -16,11 +15,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" prefHeight="93.0" prefWidth="366.0" text="Select Directory to scan" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font name="System Bold" size="27.0" />
-                     </font>
-                  </Label>
+                  <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" prefHeight="93.0" prefWidth="366.0" text="Select Directory to scan" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -29,29 +24,17 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="861.0">
                            <children>
-                              <Button fx:id="filePickerButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Click here to open file picker">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Button>
+                              <Button fx:id="filePickerButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Click here to open file picker" />
                            </children>
                         </HBox>
-                        <Label fx:id="directoryLabel" prefHeight="21.0" prefWidth="853.0" text="No directory selected." textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Customize the Results File (for default, keep unchanged):">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
+                        <Label fx:id="directoryLabel" prefHeight="21.0" prefWidth="853.0" text="No directory selected." textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="custTheResFileTEXT" text="Customize the Results File (for default, keep unchanged):" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="224.0">
                            <children>
                               <VBox alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="338.0" spacing="25.0">
                                  <children>
-                                    <CheckBox fx:id="topTenFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Files in size" textFill="WHITE" />
-                                    <CheckBox fx:id="topTenExtensionsCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Extensions in size" textFill="WHITE" />
+                                    <CheckBox fx:id="topTenFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Files in size" />
+                                    <CheckBox fx:id="topTenExtensionsCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Extensions in size" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="65.0" />
@@ -59,19 +42,15 @@
                               </VBox>
                               <VBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="338.0" spacing="4.0">
                                  <children>
-                                    <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Duplicate files and their sizes" textFill="WHITE" />
-                                    <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" textFill="WHITE" wrapText="true" />
+                                    <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Duplicate files and their sizes" />
+                                    <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" wrapText="true" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Button>
+                              <Button fx:id="startScanButton" mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan" />
                            </children>
                         </HBox>
                      </children>

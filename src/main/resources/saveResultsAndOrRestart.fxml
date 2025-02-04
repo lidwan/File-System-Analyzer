@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.SaveResultsAndOrRestartController">
+   <children>
+      <SplitPane dividerPositions="0.1319073083778966" orientation="VERTICAL" prefHeight="563.0" prefWidth="861.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <Label fx:id="saveResFileTitle" alignment="CENTER" prefHeight="64.0" prefWidth="857.0" text="Save Results File" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="bottomContForSaveRes" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <VBox fx:id="bottomContForSaveRes2" prefHeight="484.0" prefWidth="859.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox fx:id="chooseWhereCont">
+                           <children>
+                              <Button fx:id="whereToSaveButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Choose where to save results file" />
+                           </children>
+                        </VBox>
+                        <Label fx:id="saveFileLocation" text="No directory selected" />
+                        <VBox fx:id="restartButtonCont">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#switchToScene2" text="Scan a new directory" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

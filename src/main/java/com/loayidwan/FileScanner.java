@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 
@@ -23,7 +24,7 @@ public class FileScanner {
 
     //Scans for every file in "dictPath", making each file a task submitted to the executor.
     //Waits for all tasks to complete, then makes the results file.
-    public void scan(int[] userChoiceForResultFile) {
+    public void scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
         try {
             FileStats fileStats = new FileStats();
             ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT); //makes a fixed number of threads (4 in this case) that can be use in parallel
@@ -33,8 +34,10 @@ public class FileScanner {
                         .forEach(filePath -> executor.submit(() -> {
                             try {
                                 long size = Files.size(filePath);
-
                                 fileStats.addFile(filePath, size);
+
+                                //Once processed pass filePath and fileSize to UI for update
+                                onFileProcessed.accept(filePath.toString(), size);
 
                             } catch (IOException | NoSuchAlgorithmException e) {
                                 throw new RuntimeException(e);

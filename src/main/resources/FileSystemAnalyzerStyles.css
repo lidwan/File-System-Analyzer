@@ -6,9 +6,10 @@ AnchorPane{
     -fx-background-color: "black";
 }
 
-#listView {
+#fileListView {
     -fx-background-color: #2e2b2b;
     -fx-text-Fill: "white";
+    -fx-skin: 'javafx.scene.control.skin.ListViewSkin';
 }
 
 #directoryLabel, #titleSelectDirToScan, #filePickerButton,

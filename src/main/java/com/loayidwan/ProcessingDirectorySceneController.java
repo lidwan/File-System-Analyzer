@@ -1,6 +1,9 @@
 package com.loayidwan;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +20,6 @@ public class ProcessingDirectorySceneController {
     private int[] userChoiceForResultFile = new int[4];
 
     @FXML
-    private ListView<String> fileListView;
-
-    @FXML
     private Label processingDirTitle;
 
     private String absulotePathOfDir;
@@ -34,12 +34,29 @@ public class ProcessingDirectorySceneController {
         this.stage = stage;
         this.scene = scene;
     }
-//    private ObservableList<String> fileList = FXCollections.observableArrayList();
-//
-//    @FXML
-//    public void initialize() {
-//        fileListView.setItems(fileList);
-//    }
+
+    @FXML
+    private ListView<String> fileListView;
+
+    private final ObservableList<String> fileItems =
+            FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        fileListView.setItems(fileItems);
+
+        // Auto-scroll when new items are added
+        fileItems.addListener((ListChangeListener<String>) c -> {
+            while (c.next()) {
+                if (c.wasAdded()) {
+                    int lastIndex = fileItems.size() - 1;
+                    Platform.runLater(() -> {
+                        fileListView.scrollTo(lastIndex);
+                    });
+                }
+            }
+        });
+    }
 
     public void setProcessingDirTitle(String x) {
         processingDirTitle.setText(processingDirTitle.getText() + x +"\"..");
@@ -57,8 +74,16 @@ public class ProcessingDirectorySceneController {
 
         new Thread(() -> {
             //start scan on a new thread, UI remains responsive
-            fileScanner.scan(userChoiceForResultFile); // Runs in a background thread
-
+            fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
+                Platform.runLater(() -> {
+                    // Format: "Processed: filename.txt - 1.23 MB"
+                    String entry = String.format("Processed: %s - %s",
+                            fileName,
+                            FileUtils.humanReadableSize(size)
+                    );
+                    fileItems.add(entry);
+                });
+            });
             //runs after scan is complete and user clicks ok
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,

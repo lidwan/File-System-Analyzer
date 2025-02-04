@@ -61,8 +61,7 @@ public class FileStats {
     //This method takes in a file Path and adds the file path (as a string) and the file size to fileNameToSizeMap.
     //Also calls getFileExtension to get the extension of the file and adds it and the file size to extensionToSizeMap.
     //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and extensions respectively.
-    public void addFile(Path filePath) throws IOException, NoSuchAlgorithmException {
-        long size = Files.size(filePath);
+    public void addFile(Path filePath, long size) throws IOException, NoSuchAlgorithmException {
         String extension = FileUtils.getFileExtension(filePath.toString());
 
         fileNameToSizeMap.put(filePath.toAbsolutePath(), size);

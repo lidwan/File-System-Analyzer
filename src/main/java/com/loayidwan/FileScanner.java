@@ -32,7 +32,10 @@ public class FileScanner {
                 paths.filter(Files::isRegularFile)
                         .forEach(filePath -> executor.submit(() -> {
                             try {
-                                fileStats.addFile(filePath);
+                                long size = Files.size(filePath);
+
+                                fileStats.addFile(filePath, size);
+
                             } catch (IOException | NoSuchAlgorithmException e) {
                                 throw new RuntimeException(e);
                             }

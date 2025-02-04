@@ -1,5 +1,8 @@
 package com.loayidwan;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.security.NoSuchAlgorithmException;
@@ -20,7 +23,7 @@ public class FileScanner {
 
     //Scans for every file in "dictPath", making each file a task submitted to the executor.
     //Waits for all tasks to complete, then makes the results file.
-    public void scan() {
+    public void scan(int[] userChoiceForResultFile) {
         try {
             FileStats fileStats = new FileStats();
             ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT); //makes a fixed number of threads (4 in this case) that can be use in parallel
@@ -36,13 +39,14 @@ public class FileScanner {
                         }));
             } catch (IOException e) {
                 e.printStackTrace();
+                Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
             }
 
             // Stop accepting new tasks
             executor.shutdown();
 
-            int[] userChoiceForResultFile = new int[]{0,1,1,1,1,1};
-            FileUtils.AskUserAboutResultFile(userChoiceForResultFile); //asking the user to customize results file
+//            int[] userChoiceForResultFile = new int[]{1,1,1,1};
+//            FileUtils.AskUserAboutResultFile(userChoiceForResultFile); //asking the user to customize results file
                                                                     // while scanning continues.
             if (!executor.isTerminated())
                 System.out.println("Still scanning "+dictPath+". Please wait...");
@@ -53,12 +57,20 @@ public class FileScanner {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Task execution interrupted: " + e.getMessage());
+                Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
             }
 
             //tmp ofc, just for dev.
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
+
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Completed the scan on: " + dictPath + "\n\nResults File was created");
+                alert.showAndWait();
+            });
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
+            Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
         }
 
     }

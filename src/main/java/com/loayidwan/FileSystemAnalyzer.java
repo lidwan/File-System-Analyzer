@@ -18,7 +18,7 @@ public class FileSystemAnalyzer {
         if (Files.isDirectory(Path.of(dict))){
             FileScanner fileScanner = new FileScanner(dict);
             System.out.println("\nScanning directory: "+dict+"\n");
-            fileScanner.scan();
+            fileScanner.scan(new int[]{1,1,1,1});
         }
         else {
             System.err.println("String you provided is NOT a directory");

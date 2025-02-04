@@ -1,5 +1,8 @@
 package com.loayidwan;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -135,29 +138,25 @@ public class FileStats {
             writer.write("Result for scan on "+dictPath+": \n\n");
 
             if (userChoiceForResultFile[0] == 1)
-                writeAllFiles(tmpCounter, dictPath);
-
-            if (userChoiceForResultFile[1] == 1)
                 writeTopTenFiles(writer, tmpCounter);
 
-            if (userChoiceForResultFile[2] == 1)
+            if (userChoiceForResultFile[1] == 1)
                 writeTopTenExtensions(writer, tmpCounter);
 
-            if (userChoiceForResultFile[3] == 1)
+            if (userChoiceForResultFile[2] == 1)
                 writeDuplicateFiles(writer, tmpCounter);
 
-            if (userChoiceForResultFile[5] == 1)
+            if (userChoiceForResultFile[3] == 1){
                 writeTotalNumberOfFiles(writer);
-
-            if (userChoiceForResultFile[4] == 1)
                 writeTotalDictSize(writer);
-
+            }
 
             writer.close();
 
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
+            Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, "An error occurred while writing to result file."));
         }
     }
 

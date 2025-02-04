@@ -62,12 +62,6 @@ public class FileScanner {
 
             //tmp ofc, just for dev.
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
-
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                        "Completed the scan on: " + dictPath + "\n\nResults File was created");
-                alert.showAndWait();
-            });
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
             Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));

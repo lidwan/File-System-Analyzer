@@ -17,6 +17,7 @@ import java.io.IOException;
 
 public class ProcessingDirectorySceneController {
 
+    private static final int MAX_ITEMS = 21;
     private int[] userChoiceForResultFile = new int[4];
 
     @FXML
@@ -51,6 +52,10 @@ public class ProcessingDirectorySceneController {
                 if (c.wasAdded()) {
                     int lastIndex = fileItems.size() - 1;
                     Platform.runLater(() -> {
+                        if (fileItems.size() > MAX_ITEMS) {
+                            int overflow = fileItems.size() - MAX_ITEMS;
+                            fileItems.remove(0, overflow); // Remove oldest entries
+                        }
                         fileListView.scrollTo(lastIndex);
                     });
                 }

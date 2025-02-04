@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +39,9 @@ public class ProcessingDirectorySceneController {
 
     @FXML
     private ListView<String> fileListView;
+
+    @FXML
+    ProgressBar progressBar;
 
     private final ObservableList<String> fileItems =
             FXCollections.observableArrayList();
@@ -77,6 +81,7 @@ public class ProcessingDirectorySceneController {
     public void startProcessingDirectory() throws IOException {
         FileScanner fileScanner = new FileScanner(absulotePathOfDir);
 
+        progressBar.setProgress(-1);
         new Thread(() -> {
             //start scan on a new thread, UI remains responsive
             fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
@@ -105,6 +110,10 @@ public class ProcessingDirectorySceneController {
                 }
             });
 
+            // On completion, make progress bar 100%
+            Platform.runLater(() -> {
+                progressBar.setProgress(1.0);
+            });
         }).start();
     }
 

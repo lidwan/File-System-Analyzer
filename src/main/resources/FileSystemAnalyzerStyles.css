@@ -15,10 +15,13 @@ AnchorPane{
 #directoryLabel, #titleSelectDirToScan, #filePickerButton,
 #filePickerCont, #processingDirTitle, #saveResFileTitle,
 #restartButtonCont, #chooseWhereCont, #bottomContForSaveRes2,
-#saveResFileTitileCont, #saveFileLocation{
+#saveResFileTitileCont, #saveFileLocation, #progressBarCont{
     -fx-alignment: center;
 }
 
+#progressBar{
+    -fx-accent: #7bc14a;
+}
 #restartButtonCont{
     -fx-padding: 100 0 50 0;
     -fx-font-size: 18;

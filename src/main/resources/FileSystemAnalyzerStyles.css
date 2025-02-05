@@ -2,8 +2,9 @@ Label, CheckBox {
     -fx-text-Fill: "white";
 }
 
-AnchorPane{
+AnchorPane, GridPane{
     -fx-background-color: "black";
+    -fx-padding: 20 20 20 20;
 }
 
 #fileListView {
@@ -15,13 +16,22 @@ AnchorPane{
 #directoryLabel, #titleSelectDirToScan, #filePickerButton,
 #filePickerCont, #processingDirTitle, #saveResFileTitle,
 #restartButtonCont, #chooseWhereCont, #bottomContForSaveRes2,
-#saveResFileTitileCont, #saveFileLocation, #progressBarCont{
+#saveResFileTitileCont, #saveFileLocation, #progressBarCont,
+#welcomeMidCont, #welcomeLabel{
     -fx-alignment: center;
+}
+
+#startButton {
+    -fx-font-size: 26;
+}
+#welcomeLabel{
+    -fx-font-size: 28;
 }
 
 #progressBar{
     -fx-accent: #7bc14a;
 }
+
 #restartButtonCont{
     -fx-padding: 100 0 50 0;
     -fx-font-size: 18;
@@ -69,4 +79,16 @@ AnchorPane{
 
 #startScanButton {
     -fx-font-size: 26;
+}
+
+.list-view .list-cell {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #393535;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.list-view {
+    -fx-border-color: #af9595;
+    -fx-border-image-width: 10;
 }

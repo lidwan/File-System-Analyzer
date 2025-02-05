@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.nio.file.*;
@@ -58,18 +57,15 @@ public class FileStats {
         commonExtensionsGrouped.put("Disk Images", Arrays.asList("iso", "img", "dmg"));
     }
     
-    //This method takes in a file Path and adds the file path (as a string) and the file size to fileNameToSizeMap.
+    //This method takes in a file Path and adds the file pathand the file size to fileNameToSizeMap.
     //Also calls getFileExtension to get the extension of the file and adds it and the file size to extensionToSizeMap.
     //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and extensions respectively.
     public void addFile(Path filePath, long size) throws IOException, NoSuchAlgorithmException {
         String extension = FileUtils.getFileExtension(filePath.toString());
-
         fileNameToSizeMap.put(filePath.toAbsolutePath(), size);
         extensionToSizeMap.merge(extension, size, Long::sum);
-
         totalDictSize.add(size);
         numberOfFiles.addAndGet(1);
-
         handleDuplicateFiles(filePath);
         handleExtensions(extension, size);
     }
@@ -81,9 +77,7 @@ public class FileStats {
     private void handleDuplicateFiles(Path filePath) throws NoSuchAlgorithmException {
         String hashCode = FileUtils.calcHashCode(filePath);
         String currentFilePath = filePath.toAbsolutePath().toString();
-
         String existingFilePath = hashCodeToFileNameMap.putIfAbsent(hashCode, currentFilePath);
-
         if (existingFilePath != null) {
             duplicateFilesMap.computeIfAbsent(hashCode, k -> {
                 // happens once per hash
@@ -100,7 +94,6 @@ public class FileStats {
     //If "extension" isn't found it adds "Unknown" and the file size to commonExtensionsGroupedToSize.
     private void handleExtensions(String extension, long size) {
         boolean found = false;
-
         for (Map.Entry<String, List<String>> entry : commonExtensionsGrouped.entrySet()) {
             if (entry.getValue().contains(extension)) {
                 commonExtensionsGroupedToSize.merge(entry.getKey(), size, Long::sum);
@@ -108,14 +101,9 @@ public class FileStats {
                 break;
             }
         }
-
         if (!found) {
             commonExtensionsGroupedToSize.merge("Unknown", size, Long::sum);
         }
-    }
-
-    public String getFileNameOnly(String fileName){
-        return "File name: "+fileName.substring(fileName.lastIndexOf("/")+1);
     }
 
     public long getTotalDictSize(){
@@ -131,7 +119,6 @@ public class FileStats {
             } else {
                 System.out.println("File "+file.getName()+" already exists.");
             }
-            
             AtomicInteger tmpCounter = new AtomicInteger(1);
             FileWriter writer = new FileWriter(file);
             writer.write("Result for scan on "+dictPath+": \n\n");
@@ -149,9 +136,7 @@ public class FileStats {
                 writeTotalNumberOfFiles(writer);
                 writeTotalDictSize(writer);
             }
-
             writer.close();
-
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
@@ -161,31 +146,6 @@ public class FileStats {
 
     private void writeTotalNumberOfFiles(FileWriter writer) throws IOException {
         writer.write("\n- Total number of files scanned: "+numberOfFiles.get()+"\n");
-    }
-
-    private void writeAllFiles(AtomicInteger tmpCounter, String dictPath) throws IOException {
-        File file = new File("aListOfAllScannedFilesAndTheirSizes.txt");
-
-        if (file.createNewFile()) {
-            System.out.println("File created: " + file.getName());
-        } else {
-            System.out.println("File "+file.getName()+" already exists.");
-        }
-
-        FileWriter writer = new FileWriter(file);
-        writer.write("Directory: "+dictPath+" \n\n");
-        writer.write("- All Files and their sizes: \n");
-        fileNameToSizeMap.forEach((filePath, size)->{
-            try {
-                writer.write(tmpCounter + "- File name = " + filePath.getFileName() +
-                        " | File Size = " + FileUtils.humanReadableSize(size) + "\n");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            tmpCounter.getAndIncrement();
-        });
-
-        tmpCounter.lazySet(1);
     }
 
     private void writeTotalDictSize(FileWriter writer) throws IOException {
@@ -228,7 +188,6 @@ public class FileStats {
         tmpCounter.lazySet(1);
     }
 
-
     public List<Map.Entry<Path, Long>> getTopTenFileSizes(){
         List<Map.Entry<Path, Long>> sortedEntries = new ArrayList<>(fileNameToSizeMap.entrySet());
         sortedEntries.sort((entry1, entry2) ->
@@ -237,33 +196,11 @@ public class FileStats {
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
     }
 
-    public List<Map.Entry<String, Long>> getTopTenExtSizes(){
-        List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(extensionToSizeMap.entrySet());
-        sortedEntries.sort((entry1, entry2) ->
-                Long.compare(entry2.getValue(), entry1.getValue()));
-
-        return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
-    }
     public List<Map.Entry<String, Long>> getTopTenExtCommon(){
         List<Map.Entry<String, Long>> sortedEntries = new ArrayList<>(commonExtensionsGroupedToSize.entrySet());
         sortedEntries.sort((entry1, entry2) ->
                 Long.compare(entry2.getValue(), entry1.getValue()));
 
         return sortedEntries.subList(0, Math.min(10, sortedEntries.size()));
-    }
-
-    @Override
-    public String toString() {
-        return "FileStats{" +
-                "\n1- Each file in dict. and its size= " + fileNameToSizeMap +
-                "\n2- Each extension in  dict. and the total size of all files using the extension = " + extensionToSizeMap +
-                "\n3- Each hashcode (hashcode included only if there are duplicates) and a list of all files with the same hashcode = " + duplicateFilesMap +
-                "\n4- Top 10 Files in size and their sizes = " + getTopTenFileSizes() +
-                "\n5- Top 10 Extensions in size and their total sizes = " + getTopTenExtSizes() +
-                "\n6- Total dict size = " + getTotalDictSize() +
-                "\n7- Each common extension and its size "+ commonExtensionsGroupedToSize +
-                "\n8- Top 10 grouped common extension and their sizes: "+ getTopTenExtCommon() +
-                "\nNote: all sizes are in bytes"+
-                '}';
     }
 }

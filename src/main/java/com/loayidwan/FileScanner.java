@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import java.io.IOException;
 import java.nio.file.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +26,6 @@ public class FileScanner {
     public void scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
         try {
             FileStats fileStats = new FileStats();
-            ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT); //makes a fixed number of threads (4 in this case) that can be use in parallel
 
             try (Stream<Path> paths = Files.walk(Paths.get(dictPath))) {
                 paths.filter(Files::isRegularFile)
@@ -50,13 +48,6 @@ public class FileScanner {
 
             // Stop accepting new tasks
             executor.shutdown();
-
-//            int[] userChoiceForResultFile = new int[]{1,1,1,1};
-//            FileUtils.AskUserAboutResultFile(userChoiceForResultFile); //asking the user to customize results file
-                                                                    // while scanning continues.
-            if (!executor.isTerminated())
-                System.out.println("Still scanning "+dictPath+". Please wait...");
-
             try {
                 // Wait indefinitely for existing tasks to finish
                 executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);

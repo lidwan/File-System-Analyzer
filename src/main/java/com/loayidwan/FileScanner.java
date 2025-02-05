@@ -17,8 +17,8 @@ public class FileScanner {
     private final String dictPath;
 
     // Thread count used for multithreading
-    //TODO: Make THREAD_COUNT dynamic based on system resources.
-    private static final int THREAD_COUNT = 4;
+    // Uses all available resources on the machine
+    private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
 
     public FileScanner(String dictPath){
         this.dictPath = dictPath;

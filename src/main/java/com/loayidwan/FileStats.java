@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.LongAdder;
 
 public class FileStats {
     private final ConcurrentHashMap<Path, Long> fileNameToSizeMap;
-    private final ConcurrentHashMap<String, Long> extensionToSizeMap;
     private final ConcurrentHashMap<String, String> hashCodeToFileNameMap;
     private final ConcurrentHashMap<String, List<Path>> duplicateFilesMap;
     private final ConcurrentHashMap<String, Long> commonExtensionsGroupedToSize;
@@ -27,7 +26,6 @@ public class FileStats {
 
     public FileStats() {
         this.fileNameToSizeMap = new ConcurrentHashMap<>();
-        this.extensionToSizeMap = new ConcurrentHashMap<>();
         this.hashCodeToFileNameMap = new ConcurrentHashMap<>();
         this.duplicateFilesMap = new ConcurrentHashMap<>();
         this.commonExtensionsGroupedToSize = new ConcurrentHashMap<>();
@@ -63,7 +61,6 @@ public class FileStats {
     public void addFile(Path filePath, long size) throws IOException, NoSuchAlgorithmException {
         String extension = FileUtils.getFileExtension(filePath.toString());
         fileNameToSizeMap.put(filePath.toAbsolutePath(), size);
-        extensionToSizeMap.merge(extension, size, Long::sum);
         totalDictSize.add(size);
         numberOfFiles.addAndGet(1);
         handleDuplicateFiles(filePath);
@@ -122,11 +119,6 @@ public class FileStats {
         try {
             File file = new File("fileAnalysisResults.txt");
 
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
-            } else {
-                System.out.println("File "+file.getName()+" already exists.");
-            }
             AtomicInteger tmpCounter = new AtomicInteger(1);
             FileWriter writer = new FileWriter(file);
             writer.write("Result for scan on "+dictPath+": \n\n");
@@ -145,7 +137,6 @@ public class FileStats {
                 writeTotalDictSize(writer);
             }
             writer.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to result file.");
             Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, "An error occurred while writing to result file."));

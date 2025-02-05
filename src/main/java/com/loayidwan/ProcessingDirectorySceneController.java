@@ -80,7 +80,7 @@ public class ProcessingDirectorySceneController {
             fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
                 Platform.runLater(() -> {
                     // Format: "Processed: filename.txt"
-                    String entry = String.format("Processed: %s,",fileName);
+                    String entry = String.format("Processed: %s",fileName);
                     fileItems.add(entry);
                 });
             });

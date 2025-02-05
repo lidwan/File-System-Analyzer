@@ -53,6 +53,7 @@ public class SaveResultsAndOrRestartController {
             copyFile(absulotePathOfDir);
         } else {
             saveFileLocation.setText("No directory selected.");
+            saveFileLocation.setStyle("-fx-text-fill: red");
         }
     }
 
@@ -75,13 +76,12 @@ public class SaveResultsAndOrRestartController {
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "File is now saved to the selected location");
                     alert1.setHeaderText("File Saved!");
                     saveFileLocation.setText("File Saved to \n" + destinationPath.toString());
+                    saveFileLocation.setStyle("-fx-text-fill: green");
                     alert1.showAndWait();
-                    System.out.println("File copied successfully to: " + destinationPath);
                 }
             } catch (IOException e) {
                 Alert alert1 = new Alert(Alert.AlertType.ERROR, "An error occurred while copying the file to the destination path.");
                 alert1.showAndWait();
-                System.err.println("Error copying file: " + e.getMessage());
             }
         }
     }

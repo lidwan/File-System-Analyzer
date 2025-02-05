@@ -48,8 +48,10 @@ public class FilePickerSceneController {
             dirName = selectedDirectory.getName();
             absulotePathOfDir = selectedDirectory.getAbsolutePath();
             directoryLabel.setText("Selected directory: \"" +selectedDirectory+ "\"");
+            directoryLabel.setStyle("-fx-text-fill: green");
         } else {
             directoryLabel.setText("No directory selected.");
+            directoryLabel.setStyle("-fx-text-fill: red");
         }
     }
 

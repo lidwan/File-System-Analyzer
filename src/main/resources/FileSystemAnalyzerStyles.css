@@ -25,9 +25,14 @@ AnchorPane, GridPane{
     -fx-font-size: 26;
 }
 #welcomeLabel{
-    -fx-font-size: 28;
+    -fx-font-size: 35;
 }
-
+#welcomeDesc {
+    -fx-font-size: 20;
+}
+#createdBy, #githubLink, #wevsiteLink {
+    -fx-font-size: 16;
+}
 #progressBar{
     -fx-accent: #7bc14a;
 }
@@ -38,7 +43,7 @@ AnchorPane, GridPane{
  }
 
 #saveResFileTitle {
-    -fx-font-size: 26;
+    -fx-font-size: 28;
     -fx-font-weight: bold;
 }
 
@@ -47,38 +52,45 @@ AnchorPane, GridPane{
 }
 
 #saveFileLocation{
-    -fx-font-size: 16;
+    -fx-font-size: 18;
 }
 
 #processingDirTitle {
-    -fx-font-size: 22;
+    -fx-font-size: 26;
     -fx-font-weight: bold;
+    -fx-padding:  0 0 25 0;
 }
 
 #whereToSaveButton {
-    -fx-font-size: 14;
+    -fx-font-size: 16;
+}
+#scanNewDir{
+    -fx-font-size: 20;
 }
 
 #titleSelectDirToScan{
-    -fx-font-size: 27;
+    -fx-font-size: 30;
     -fx-font-weight: bold;
 }
 
 #filePickerButton{
-    -fx-font-size: 17;
+    -fx-font-size: 20;
 }
 
 #directoryLabel {
-    -fx-font-size: 18;
+    -fx-font-size: 20;
 }
 
 #custTheResFileTEXT {
-    -fx-font-size: 18;
+    -fx-font-size: 20;
     -fx-font-weight: bold;
+}
+#topTenFilesCheckBox, #topTenExtensionsCheckBox,#duplicateFilesCheckBox, #totalFileCountAndDirSizeCheckBox{
+    -fx-font-size: 16;
 }
 
 #startScanButton {
-    -fx-font-size: 26;
+    -fx-font-size: 28;
 }
 
 .list-view .list-cell {

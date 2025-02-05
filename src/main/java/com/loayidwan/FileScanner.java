@@ -22,11 +22,16 @@ public class FileScanner {
     }
 
     //Scans for every file in "dictPath", making each file a task submitted to the executor.
-    //Waits for all tasks to complete, then makes the results file.
+    //Waits for all tasks to complete, then makes the results file and alerts the user that the
+    //results file was created.
     public void scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
         try {
             FileStats fileStats = new FileStats();
 
+            //makes a fixed number of threads that can be used in parallel
+            ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+
+            //for each path on dictPath, it's submmited to the executor for processing when a thread is free
             try (Stream<Path> paths = Files.walk(Paths.get(dictPath))) {
                 paths.filter(Files::isRegularFile)
                         .forEach(filePath -> executor.submit(() -> {
@@ -56,8 +61,6 @@ public class FileScanner {
                 System.err.println("Task execution interrupted: " + e.getMessage());
                 Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
             }
-
-            //tmp ofc, just for dev.
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());

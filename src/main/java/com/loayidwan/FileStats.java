@@ -57,8 +57,8 @@ public class FileStats {
         commonExtensionsGrouped.put("Disk Images", Arrays.asList("iso", "img", "dmg"));
     }
     
-    //This method takes in a file Path and adds the file pathand the file size to fileNameToSizeMap.
-    //Also calls getFileExtension to get the extension of the file and adds it and the file size to extensionToSizeMap.
+    //This method takes in a file Path and adds the file path and the file size to fileNameToSizeMap.
+    //Also calls getFileExtension to get the extension of the file.
     //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and extensions respectively.
     public void addFile(Path filePath, long size) throws IOException, NoSuchAlgorithmException {
         String extension = FileUtils.getFileExtension(filePath.toString());
@@ -80,7 +80,7 @@ public class FileStats {
         String existingFilePath = hashCodeToFileNameMap.putIfAbsent(hashCode, currentFilePath);
         if (existingFilePath != null) {
             duplicateFilesMap.computeIfAbsent(hashCode, k -> {
-                // happens once per hash
+                // Only happens once per hash
                 List<Path> list = new ArrayList<>();
                 list.add(Path.of(existingFilePath));
                 return list;
@@ -110,6 +110,14 @@ public class FileStats {
         return totalDictSize.sum();
     }
 
+    //Makes the result file, which is customizable by the user in GUI, user choices are passed to the method
+    //as an array (userChoiceForResultFile) of int, where each index represents a user choice
+    //userChoiceForResultFile[0] is userChoiceForResultFile,
+    //userChoiceForResultFile[1] is TopTenExtensions,
+    //userChoiceForResultFile[2] is DuplicateFiles,
+    //userChoiceForResultFile[3] is TotalNumberOfFiles and TotalDictSize.
+    //userChoiceForResultFile is initialized to all 1's representing including all sections.
+    //The value 0 means the user asked for this section to be removed.
     public void makeResFile(String dictPath, int[] userChoiceForResultFile){
         try {
             File file = new File("fileAnalysisResults.txt");
@@ -157,7 +165,6 @@ public class FileStats {
         for (Map.Entry<String, List<Path>> entry : duplicateFilesMap.entrySet()) {
             List<Path> listOfDuplicateFiles = entry.getValue();
             writer.write(tmpCounter + "- ");
-
             for (Path duplicateFilePath : listOfDuplicateFiles) {
                 writer.write(duplicateFilePath.getFileName() + ", ");
             }

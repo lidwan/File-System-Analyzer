@@ -2,38 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="welcomeScene" maxHeight="563.0" maxWidth="861.0" minHeight="563.0" minWidth="861.0" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.WelcomeSceneController">
-   <children>
-      <VBox alignment="CENTER" layoutX="20.0" layoutY="74.0" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="label" prefHeight="35.0" prefWidth="549.0" text="Welcome to File System Analyzer!" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Label>
-            <Label text="A Java-based file analyzer that scans a directory,&#10;retrieves file details (size, extension type, hash for duplicates),&#10;and generates a results file for the user." textAlignment="CENTER" />
-            <Button mnemonicParsing="false" onAction="#switchToScene2" text="Click here to start">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Button>
-            <HBox alignment="CENTER" spacing="60.0">
-               <children>
-                  <Label prefHeight="41.0" prefWidth="150.0" text="Created by Loay Idwan" textFill="WHITE" />
-                  <Label text="GitHub repo: " />
-                  <Label text="Visit my website:  loayidwan.com&#10;&#10;" />
-               </children>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane id="welcomeScene" maxHeight="563.0" maxWidth="861.0" minHeight="563.0" minWidth="861.0" prefHeight="563.0"
+            prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.WelcomeSceneController">
+   <VBox alignment="CENTER" layoutX="20.0" layoutY="74.0" spacing="60.0" AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="label" prefHeight="35.0" prefWidth="549.0" text="Welcome to File System Analyzer!"
+             textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="28.0"/>
+         </font>
+      </Label>
+      <Label text="A multi-threaded Java-based file analyzer that scans a directory,&#10;retrieves file details (size, extension type, hash for duplicates),&#10;and generates a customizable results file."
+             textAlignment="CENTER"/>
+      <Button mnemonicParsing="false" onAction="#switchToScene2" text="Click here to start">
+         <font>
+            <Font size="26.0"/>
+         </font>
+      </Button>
+      <HBox alignment="CENTER" spacing="60.0">
+         <VBox.margin>
+            <Insets top="30.0"/>
+         </VBox.margin>
+         <Label prefHeight="41.0" prefWidth="150.0" text="Created by Loay Idwan" textFill="WHITE"/>
+         <Hyperlink fx:id="githubLink" onAction="#handelGithubLink" text="GitHub Repository"/>
+         <Hyperlink fx:id="wevsiteLink" layoutX="723.0" layoutY="20.0" onAction="#handelWebsiteLink"
+                    text="Website"/>
+         <Hyperlink fx:id="blogLink" onAction="#handelBlogLink" text="Blog"/>
+      </HBox>
+   </VBox>
 </AnchorPane>

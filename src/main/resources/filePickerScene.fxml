@@ -9,55 +9,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
-   <children>
-      <SplitPane dividerPositions="0.14616755793226383" orientation="VERTICAL" prefHeight="563.0" prefWidth="861.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" prefHeight="93.0" prefWidth="366.0" text="Select Directory to scan" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="476.0" prefWidth="859.0" spacing="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="861.0">
-                           <children>
-                              <Button fx:id="filePickerButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Click here to open file picker" />
-                           </children>
-                        </HBox>
-                        <Label fx:id="directoryLabel" prefHeight="21.0" prefWidth="853.0" text="No directory selected." textAlignment="CENTER" wrapText="true" />
-                        <Label fx:id="custTheResFileTEXT" text="Customize the Results File (for default, keep unchanged):" />
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="224.0">
-                           <children>
-                              <VBox alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="338.0" spacing="25.0">
-                                 <children>
-                                    <CheckBox fx:id="topTenFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Files in size" />
-                                    <CheckBox fx:id="topTenExtensionsCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Extensions in size" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="65.0" />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="338.0" spacing="4.0">
-                                 <children>
-                                    <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Duplicate files and their sizes" />
-                                    <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" wrapText="true" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <Button fx:id="startScanButton" mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0"
+            prefWidth="861.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
+    <SplitPane dividerPositions="0.14616755793226383" orientation="VERTICAL" prefHeight="563.0" prefWidth="861.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               AnchorPane.topAnchor="0.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" prefHeight="93.0" prefWidth="366.0"
+                   text="Select Directory to scan" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <VBox alignment="CENTER" prefHeight="476.0" prefWidth="859.0" spacing="35.0"
+                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                <HBox alignment="CENTER" prefHeight="48.0" prefWidth="861.0">
+                    <Button fx:id="filePickerButton" mnemonicParsing="false"
+                            onAction="#openDirectoryPicker" text="Click here to open file picker"/>
+                </HBox>
+                <Label fx:id="directoryLabel" prefHeight="21.0" prefWidth="853.0"
+                       text="No directory selected." textAlignment="CENTER" wrapText="true"/>
+                <Label fx:id="custTheResFileTEXT"
+                       text="Customize the Results File (for default, keep unchanged):"/>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="224.0">
+                    <VBox alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="338.0" spacing="25.0">
+                        <HBox.margin>
+                            <Insets left="65.0"/>
+                        </HBox.margin>
+                        <CheckBox fx:id="topTenFilesCheckBox" mnemonicParsing="false"
+                                  selected="true" text="Include Top 10 Files in size"/>
+                        <CheckBox fx:id="topTenExtensionsCheckBox" mnemonicParsing="false"
+                                  selected="true" text="Include Top 10 Extensions in size"/>
+                    </VBox>
+                    <VBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0"
+                          prefWidth="338.0" spacing="4.0">
+                        <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false"
+                                  selected="true" text="Include Duplicate files and their sizes"/>
+                        <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity"
+                                  mnemonicParsing="false" selected="true"
+                                  text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;"
+                                  wrapText="true"/>
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER">
+                    <Button fx:id="startScanButton" mnemonicParsing="false" onAction="#switchToScene3"
+                            text="Start the Scan"/>
+                </HBox>
+            </VBox>
+        </AnchorPane>
+    </SplitPane>
 </AnchorPane>

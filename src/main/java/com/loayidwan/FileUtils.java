@@ -15,7 +15,7 @@ public class FileUtils {
     public static String getFileExtension(String fileName) {
         String ext = FilenameUtils.getExtension(fileName);
 
-        return ext.isEmpty() ? "Unknown" : ext;
+        return ext.isEmpty() ? "Unknown" : ext.toLowerCase();
     }
 
     public static String calcHashCode(Path filePath) throws NoSuchAlgorithmException {

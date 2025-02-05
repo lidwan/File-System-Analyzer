@@ -17,19 +17,21 @@ import java.io.IOException;
 public class FilePickerSceneController {
     @FXML
     private Label directoryLabel;
-    private String dirName;
-    private String absulotePathOfDir;
 
     @FXML
     private CheckBox topTenFilesCheckBox;
+
     @FXML
     private CheckBox topTenExtensionsCheckBox;
+
     @FXML
     private CheckBox duplicateFilesCheckBox;
+
     @FXML
     private CheckBox totalFileCountAndDirSizeCheckBox;
 
-
+    private String dirName;
+    private String absulotePathOfDir;
     private int[] userChoiceForResultFile = new int[]{1,1,1,1};
 
     @FXML
@@ -40,12 +42,12 @@ public class FilePickerSceneController {
 
         // Open the directory chooser
         File selectedDirectory = directoryChooser.showDialog(new Stage());
+
         // Check if a directory was selected
         if (selectedDirectory != null) {
             dirName = selectedDirectory.getName();
             absulotePathOfDir = selectedDirectory.getAbsolutePath();
             directoryLabel.setText("Selected directory: \"" +selectedDirectory+ "\"");
-
         } else {
             directoryLabel.setText("No directory selected.");
         }
@@ -56,7 +58,6 @@ public class FilePickerSceneController {
             if (absulotePathOfDir != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/processingDirectoryScene.fxml"));
                 Parent root = loader.load();
-
                 ProcessingDirectorySceneController processingDirectorySceneController = loader.getController();
 
                 //passing directory name to next scene
@@ -73,11 +74,8 @@ public class FilePickerSceneController {
 
                 //passing the absolute path of dir to next scene
                 processingDirectorySceneController.setabsulotePathOfDir(absulotePathOfDir);
-
-
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
-
                 stage.setScene(scene);
                 stage.show();
 

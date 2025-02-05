@@ -17,25 +17,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ProcessingDirectorySceneController {
-
-    private static final int MAX_ITEMS = 21;
-    private int[] userChoiceForResultFile = new int[4];
-
     @FXML
     private Label processingDirTitle;
 
-    private String absulotePathOfDir;
-
     @FXML
     private Stage stage;
+
     @FXML
     private Scene scene;
-
-
-    public void setStageAndScene(Stage stage, Scene scene) {
-        this.stage = stage;
-        this.scene = scene;
-    }
 
     @FXML
     private ListView<String> fileListView;
@@ -43,6 +32,10 @@ public class ProcessingDirectorySceneController {
     @FXML
     ProgressBar progressBar;
 
+
+    private static final int MAX_ITEMS = 21;
+    private int[] userChoiceForResultFile = new int[4];
+    private String absulotePathOfDir;
     private final ObservableList<String> fileItems =
             FXCollections.observableArrayList();
 
@@ -58,7 +51,7 @@ public class ProcessingDirectorySceneController {
                     Platform.runLater(() -> {
                         if (fileItems.size() > MAX_ITEMS) {
                             int overflow = fileItems.size() - MAX_ITEMS;
-                            fileItems.remove(0, overflow); // Remove oldest entries
+                            fileItems.remove(0, overflow); // Removes oldest entries
                         }
                         fileListView.scrollTo(lastIndex);
                     });
@@ -67,6 +60,7 @@ public class ProcessingDirectorySceneController {
         });
     }
 
+    //Sets the Scene title to Processing "DIRECTORY"..
     public void setProcessingDirTitle(String x) {
         processingDirTitle.setText(processingDirTitle.getText() + x +"\"..");
     }
@@ -80,7 +74,6 @@ public class ProcessingDirectorySceneController {
 
     public void startProcessingDirectory() throws IOException {
         FileScanner fileScanner = new FileScanner(absulotePathOfDir);
-
         progressBar.setProgress(-1);
         new Thread(() -> {
             //start scan on a new thread, UI remains responsive
@@ -123,11 +116,9 @@ public class ProcessingDirectorySceneController {
 
     public void switchToScene3(FXMLLoader loader, Parent root) throws IOException {
         try {
-
             if (stage == null) {
                 stage = (Stage) Stage.getWindows().get(0);
             }
-
             if (scene == null) {
                 scene = new Scene(root);
                 stage.setScene(scene);

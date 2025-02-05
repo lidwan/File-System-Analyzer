@@ -19,20 +19,28 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
+
 public class SaveResultsAndOrRestartController {
 
     @FXML
     private Label saveFileLocation;
 
+    @FXML
+    private String dirName;
+
     private String absulotePathOfDir;
 
     @FXML
-    private String dirName;
+    public void setDirName(String absulotePathOfDir) {
+        dirName = Paths.get(absulotePathOfDir).getFileName().toString();
+    }
 
     @FXML
     private void openDirectoryPicker() throws IOException {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a Directory");
+
+        //sets the default directory the directory chooser opens in to user home folder
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
         // Open the directory chooser
@@ -63,7 +71,7 @@ public class SaveResultsAndOrRestartController {
             try {
                 Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                 if (Files.exists(destinationPath)) {
-                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "File is now saved to the selected location");
+                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "File is now saved to the selected location");
                     alert1.setHeaderText("File Saved!");
                     saveFileLocation.setText("File Saved to \n" + destinationPath.toString());
                     alert1.showAndWait();
@@ -75,17 +83,15 @@ public class SaveResultsAndOrRestartController {
                 System.err.println("Error copying file: " + e.getMessage());
             }
         }
-
     }
+
     @FXML
-    public void switchToScene2(javafx.event.ActionEvent event) throws IOException {
+    public void switchToScene2(javafx.event.ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/filePickerScene.fxml"));
             Parent root = loader.load();
-
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
-
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -93,11 +99,5 @@ public class SaveResultsAndOrRestartController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }
-
-    }
-
-    @FXML
-    public void setDirName(String absulotePathOfDir) {
-        dirName = Paths.get(absulotePathOfDir).getFileName().toString();
     }
 }

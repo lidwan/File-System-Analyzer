@@ -15,7 +15,10 @@ import java.util.stream.Stream;
 
 public class FileScanner {
     private final String dictPath;
-    private static final int THREAD_COUNT = 4; // Thread count used for multithreading
+
+    // Thread count used for multithreading
+    //TODO: Make THREAD_COUNT dynamic based on system resources.
+    private static final int THREAD_COUNT = 4;
 
     public FileScanner(String dictPath){
         this.dictPath = dictPath;
@@ -46,9 +49,12 @@ public class FileScanner {
                                 throw new RuntimeException(e);
                             }
                         }));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-                Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                    alert.showAndWait();
+                });
             }
 
             // Stop accepting new tasks
@@ -59,13 +65,17 @@ public class FileScanner {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Task execution interrupted: " + e.getMessage());
-                Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
-            }
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                    alert.showAndWait();
+                });            }
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
-            Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, e.getMessage()));
-        }
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            });        }
 
     }
 }

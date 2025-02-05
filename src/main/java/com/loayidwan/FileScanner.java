@@ -33,54 +33,53 @@ public class FileScanner {
             FileStats fileStats = new FileStats();
 
             //makes a fixed number of threads that can be used in parallel
-            ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+            try (ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT)) {
 
-            //for each path on dictPath, it's submmited to the executor for processing when a thread is free
-            try (Stream<Path> paths = Files.walk(Paths.get(dictPath))) {
-                paths.filter(Files::isRegularFile)
-                        .forEach(filePath -> executor.submit(() -> {
-                            try {
-                                long size = Files.size(filePath);
-                                fileStats.addFile(filePath, size);
+                //for each path on dictPath, it's submmited to the executor for processing when a thread is free
+                try (Stream<Path> paths = Files.walk(Paths.get(dictPath))) {
+                    paths.filter(Files::isRegularFile)
+                            .forEach(filePath -> executor.submit(() -> {
+                                try {
+                                    long size = Files.size(filePath);
+                                    fileStats.addFile(filePath, size);
 
-                                //Once processed pass filePath and fileSize to UI for update
-                                onFileProcessed.accept(filePath.toString(), size);
+                                    //Once processed pass filePath and fileSize to UI for update
+                                    onFileProcessed.accept(filePath.toString(), size);
 
-                            } catch (IOException | NoSuchAlgorithmException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }));
-            } catch(UncheckedIOException e){
-                e.printStackTrace();
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "You don't have access to read files:, \nrun the program with elevated permissions if you wish to continue ");
-                    alert.setHeaderText("Access denied!");
-                    alert.showAndWait();
-                });
-                return false;
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                });
-                return false;
-            }
+                                } catch (IOException | NoSuchAlgorithmException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }));
+                } catch (UncheckedIOException e) {
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "You don't have access to read files:, \nrun the program with elevated permissions if you wish to continue ");
+                        alert.setHeaderText("Access denied!");
+                        alert.showAndWait();
+                    });
+                    return false;
+                } catch (Exception e) {
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alert.showAndWait();
+                    });
+                    return false;
+                }
 
-            // Stop accepting new tasks
-            executor.shutdown();
-            try {
-                // Wait indefinitely for existing tasks to finish
-                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.err.println("Task execution interrupted: " + e.getMessage());
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-                    alert.showAndWait();
-                });
-                return false;
+                // Stop accepting new tasks
+                executor.shutdown();
+                try {
+                    // Wait indefinitely for existing tasks to finish
+                    //noinspection ResultOfMethodCallIgnored
+                    executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Task execution interrupted: " + e.getMessage());
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alert.showAndWait();
+                    });
+                    return false;
+                }
             }
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
         } catch (Exception e) {

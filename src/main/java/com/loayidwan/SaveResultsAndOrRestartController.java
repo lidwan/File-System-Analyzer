@@ -29,15 +29,13 @@ public class SaveResultsAndOrRestartController {
     @FXML
     private String dirName;
 
-    private String absulotePathOfDir;
-
     @FXML
     public void setDirName(String absulotePathOfDir) {
         dirName = Paths.get(absulotePathOfDir).getFileName().toString();
     }
 
     @FXML
-    private void openDirectoryPicker() throws IOException {
+    private void openDirectoryPicker() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a Directory");
 
@@ -49,7 +47,7 @@ public class SaveResultsAndOrRestartController {
 
         // Check if a directory was selected
         if (selectedDirectory != null) {
-            absulotePathOfDir = selectedDirectory.getAbsolutePath();
+            String absulotePathOfDir = selectedDirectory.getAbsolutePath();
             copyFile(absulotePathOfDir);
         } else {
             saveFileLocation.setText("No directory selected.");
@@ -60,22 +58,21 @@ public class SaveResultsAndOrRestartController {
     public void copyFile(String dir) {
         Path sourcePath = Path.of("fileAnalysisResults.txt");
         Path path = Path.of(dir, "File-Analysis-Results-On-"+dirName+".txt");
-        Path destinationPath = path;
         boolean proceed = true;
         if (Files.exists(path)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "A file with the same name already exists\nDo you want to overwrite the existing file?\n");
             Optional<ButtonType> x = alert.showAndWait();
-            if (!x.get().equals(ButtonType.OK)) {
+            if (x.isPresent() && !x.get().equals(ButtonType.OK)) {
                 proceed = false;
             }
         }
         if(proceed) {
             try {
-                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-                if (Files.exists(destinationPath)) {
+                Files.copy(sourcePath, path, StandardCopyOption.REPLACE_EXISTING);
+                if (Files.exists(path)) {
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "File is now saved to the selected location");
                     alert1.setHeaderText("File Saved!");
-                    saveFileLocation.setText("File Saved to \n" + destinationPath.toString());
+                    saveFileLocation.setText("File Saved to \n" + path);
                     saveFileLocation.setStyle("-fx-text-fill: green");
                     alert1.showAndWait();
                 }
@@ -96,7 +93,6 @@ public class SaveResultsAndOrRestartController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }

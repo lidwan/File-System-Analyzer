@@ -14,8 +14,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class ProcessingDirectorySceneController {
     @FXML
     private Label processingDirTitle;
@@ -34,7 +32,7 @@ public class ProcessingDirectorySceneController {
 
 
     private static final int MAX_ITEMS = 21;
-    private int[] userChoiceForResultFile = new int[4];
+    private final int[] userChoiceForResultFile = new int[4];
     private String absulotePathOfDir;
     private final ObservableList<String> fileItems =
             FXCollections.observableArrayList();
@@ -60,7 +58,7 @@ public class ProcessingDirectorySceneController {
         });
     }
 
-    //Sets the Scene title to Processing "DIRECTORY"..
+    //Sets the Scene title to Processing "DIRECTORY".
     public void setProcessingDirTitle(String x) {
         processingDirTitle.setText(processingDirTitle.getText() + x +"\"..");
     }
@@ -72,19 +70,17 @@ public class ProcessingDirectorySceneController {
         userChoiceForResultFile[3] = array[3];
     }
 
-    public void startProcessingDirectory() throws IOException {
+    public void startProcessingDirectory() {
         FileScanner fileScanner = new FileScanner(absulotePathOfDir);
         progressBar.setProgress(-1);
         new Thread(() -> {
 
             //start scan on a new thread, UI remains responsive
-            boolean noErrors = fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
-                Platform.runLater(() -> {
-                    // Format: "Processed: filename.txt"
-                    String entry = String.format("Processed: %s",fileName);
-                    fileItems.add(entry);
-                });
-            });
+            boolean noErrors = fileScanner.scan(userChoiceForResultFile, (fileName, _) -> Platform.runLater(() -> {
+                // Format: "Processed: filename.txt"
+                String entry = String.format("Processed: %s",fileName);
+                fileItems.add(entry);
+            }));
             if (noErrors) {
                 //runs after scan is complete (and is successful) and user clicks ok
                 Platform.runLater(() -> {
@@ -97,7 +93,7 @@ public class ProcessingDirectorySceneController {
                         Parent root = loader.load();
                         SaveResultsAndOrRestartController saveResultsAndOrRestartController = loader.getController();
                         saveResultsAndOrRestartController.setDirName(absulotePathOfDir);
-                        switchToScene3(loader, root);
+                        switchToScene3(root);
                     } catch (Exception e) {
                         Alert alert1 = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alert1.showAndWait();
@@ -106,9 +102,7 @@ public class ProcessingDirectorySceneController {
                 });
             }
             // On completion, make progress bar 100%
-            Platform.runLater(() -> {
-                progressBar.setProgress(1.0);
-            });
+            Platform.runLater(() -> progressBar.setProgress(1.0));
         }).start();
     }
 
@@ -116,10 +110,10 @@ public class ProcessingDirectorySceneController {
         this.absulotePathOfDir = absulotePathOfDir;
     }
 
-    public void switchToScene3(FXMLLoader loader, Parent root) throws IOException {
+    public void switchToScene3(Parent root) {
         try {
             if (stage == null) {
-                stage = (Stage) Stage.getWindows().get(0);
+                stage = (Stage) Stage.getWindows().getFirst();
             }
             if (scene == null) {
                 scene = new Scene(root);
@@ -128,7 +122,6 @@ public class ProcessingDirectorySceneController {
                 scene.setRoot(root);
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Prints exact error
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }

@@ -12,7 +12,6 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
 public class FilePickerSceneController {
     @FXML
@@ -32,10 +31,10 @@ public class FilePickerSceneController {
 
     private String dirName;
     private String absulotePathOfDir;
-    private int[] userChoiceForResultFile = new int[]{1,1,1,1};
+    private final int[] userChoiceForResultFile = new int[]{1,1,1,1};
 
     @FXML
-    private void openDirectoryPicker() throws IOException {
+    private void openDirectoryPicker() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a Directory");
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -55,7 +54,7 @@ public class FilePickerSceneController {
         }
     }
 
-    public void switchToScene3(javafx.event.ActionEvent event) throws IOException {
+    public void switchToScene3(javafx.event.ActionEvent event) {
         try {
             if (absulotePathOfDir != null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/processingDirectoryScene.fxml"));
@@ -89,7 +88,6 @@ public class FilePickerSceneController {
                 alert.showAndWait();
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Prints exact error
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }

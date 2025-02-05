@@ -76,7 +76,7 @@ public class FileStats {
         String currentFilePath = filePath.toAbsolutePath().toString();
         String existingFilePath = hashCodeToFileNameMap.putIfAbsent(hashCode, currentFilePath);
         if (existingFilePath != null) {
-            duplicateFilesMap.computeIfAbsent(hashCode, k -> {
+            duplicateFilesMap.computeIfAbsent(hashCode, _ -> {
                 // Only happens once per hash
                 List<Path> list = new ArrayList<>();
                 list.add(Path.of(existingFilePath));

@@ -6,11 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import java.io.IOException;
 
 public class WelcomeSceneController {
 
-    public void switchToScene2(javafx.event.ActionEvent event) throws IOException {
+    public void switchToScene2(javafx.event.ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/filePickerScene.fxml"));
             Parent root = loader.load();
@@ -21,7 +20,6 @@ public class WelcomeSceneController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace(); // Prints exact error
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }

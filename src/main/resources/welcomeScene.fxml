@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<!--suppress JavaFxUnresolvedFxIdReference -->
 <GridPane fx:id="welcomeGrid" alignment="CENTER" prefHeight="700.0" prefWidth="1000.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.WelcomeSceneController">
    <columnConstraints>
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="482.0" minWidth="10.0" prefWidth="427.0" />

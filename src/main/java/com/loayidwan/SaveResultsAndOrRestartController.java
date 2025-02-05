@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -95,7 +96,7 @@ public class SaveResultsAndOrRestartController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace(); // Prints exact error
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading scene: " + e.getMessage());
             alert.showAndWait();
         }

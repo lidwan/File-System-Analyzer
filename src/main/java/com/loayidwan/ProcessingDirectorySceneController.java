@@ -76,33 +76,35 @@ public class ProcessingDirectorySceneController {
         FileScanner fileScanner = new FileScanner(absulotePathOfDir);
         progressBar.setProgress(-1);
         new Thread(() -> {
+
             //start scan on a new thread, UI remains responsive
-            fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
+            boolean noErrors = fileScanner.scan(userChoiceForResultFile, (fileName, size) -> {
                 Platform.runLater(() -> {
                     // Format: "Processed: filename.txt"
                     String entry = String.format("Processed: %s",fileName);
                     fileItems.add(entry);
                 });
             });
-            //runs after scan is complete and user clicks ok
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                        "Results File was created.\nYou can choose where to save it in the next page");
-                alert.setHeaderText("Scan completed!");
-                alert.showAndWait();
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/saveResultsAndOrRestart.fxml"));
-                    Parent root = loader.load();
-                    SaveResultsAndOrRestartController saveResultsAndOrRestartController = loader.getController();
-                    saveResultsAndOrRestartController.setDirName(absulotePathOfDir);
-                    switchToScene3(loader, root);
-                } catch (Exception e) {
-                    Alert alert1 = new Alert(Alert.AlertType.ERROR, e.getMessage());
-                    alert1.showAndWait();
-                    throw new RuntimeException(e);
-                }
-            });
-
+            if (noErrors) {
+                //runs after scan is complete (and is successful) and user clicks ok
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                            "Results File was created.\nYou can choose where to save it in the next page");
+                    alert.setHeaderText("Scan completed!");
+                    alert.showAndWait();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/saveResultsAndOrRestart.fxml"));
+                        Parent root = loader.load();
+                        SaveResultsAndOrRestartController saveResultsAndOrRestartController = loader.getController();
+                        saveResultsAndOrRestartController.setDirName(absulotePathOfDir);
+                        switchToScene3(loader, root);
+                    } catch (Exception e) {
+                        Alert alert1 = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alert1.showAndWait();
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
             // On completion, make progress bar 100%
             Platform.runLater(() -> {
                 progressBar.setProgress(1.0);

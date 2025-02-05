@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
@@ -27,7 +28,7 @@ public class FileScanner {
     //Scans for every file in "dictPath", making each file a task submitted to the executor.
     //Waits for all tasks to complete, then makes the results file and alerts the user that the
     //results file was created.
-    public void scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
+    public boolean scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
         try {
             FileStats fileStats = new FileStats();
 
@@ -49,12 +50,22 @@ public class FileScanner {
                                 throw new RuntimeException(e);
                             }
                         }));
-            } catch (Exception e) {
+            } catch(UncheckedIOException e){
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "You don't have access to read files:, \nrun the program with elevated permissions if you wish to continue ");
+                    alert.setHeaderText("Access denied!");
+                    alert.showAndWait();
+                });
+                return false;
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 Platform.runLater(() -> {
                     Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                     alert.showAndWait();
                 });
+                return false;
             }
 
             // Stop accepting new tasks
@@ -68,14 +79,18 @@ public class FileScanner {
                 Platform.runLater(() -> {
                     Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                     alert.showAndWait();
-                });            }
+                });
+                return false;
+            }
             fileStats.makeResFile(dictPath, userChoiceForResultFile);
         } catch (Exception e) {
             System.err.println("Error traversing directory: " + e.getMessage());
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.showAndWait();
-            });        }
-
+            });
+            return false;
+        }
+        return true;
     }
 }

@@ -67,7 +67,7 @@ public class FilePickerSceneController {
                 //modify user choice if not default selected
                 if (!topTenFilesCheckBox.isSelected()) {userChoiceForResultFile[0] = 0;}
                 if (!topTenExtensionsCheckBox.isSelected()) {userChoiceForResultFile[1] = 0;}
-                if (!duplicateFilesCheckBox.isSelected()) {userChoiceForResultFile[2] = 0;}
+                if (duplicateFilesCheckBox.isSelected()) {userChoiceForResultFile[2] = 1;}
                 if (!totalFileCountAndDirSizeCheckBox.isSelected()) {userChoiceForResultFile[3] = 0;}
 
                 //passing user choices to next scene

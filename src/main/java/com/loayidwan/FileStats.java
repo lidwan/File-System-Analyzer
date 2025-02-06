@@ -57,14 +57,21 @@ public class FileStats {
     
     //This method takes in a file Path and adds the file path and the file size to fileNameToSizeMap.
     //Also calls getFileExtension to get the extension of the file.
-    //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and extensions respectively.
-    public void addFile(Path filePath, long size) throws IOException, NoSuchAlgorithmException {
-        String extension = FileUtils.getFileExtension(filePath.toString());
-        fileNameToSizeMap.put(filePath.toAbsolutePath(), size);
-        totalDictSize.add(size);
-        numberOfFiles.addAndGet(1);
-        handleDuplicateFiles(filePath);
-        handleExtensions(extension, size);
+    //Then the method calls handleDuplicateFiles and handleExtensions to handle duplicate files and
+    //extensions respectively (only computes if user specified)
+    public void addFile(Path filePath, long size, int[] userChoiceForResultFile) throws IOException, NoSuchAlgorithmException {
+        if (userChoiceForResultFile[0] == 1)
+            fileNameToSizeMap.put(filePath.toAbsolutePath(), size);
+        if (userChoiceForResultFile[1] == 1){
+            String extension = FileUtils.getFileExtension(filePath.toString());
+            handleExtensions(extension, size);
+        }
+        if (userChoiceForResultFile[2] == 1)
+            handleDuplicateFiles(filePath);
+        if (userChoiceForResultFile[3] == 1) {
+            totalDictSize.add(size);
+            numberOfFiles.addAndGet(1);
+        }
     }
 
     // This method calls calcHashCode to get the hashcode of the file, then tries to add the file as the

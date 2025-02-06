@@ -41,7 +41,7 @@ public class FileScanner {
                             .forEach(filePath -> executor.submit(() -> {
                                 try {
                                     long size = Files.size(filePath);
-                                    fileStats.addFile(filePath, size);
+                                    fileStats.addFile(filePath, size, userChoiceForResultFile);
 
                                     //Once processed pass filePath and fileSize to UI for update
                                     onFileProcessed.accept(filePath.toString(), size);

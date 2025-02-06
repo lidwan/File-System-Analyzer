@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -18,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -30,8 +33,30 @@ public class SaveResultsAndOrRestartController {
     private String dirName;
 
     @FXML
+    private PieChart pieChart;
+
+    @FXML
     public void setDirName(String absulotePathOfDir) {
         dirName = Paths.get(absulotePathOfDir).getFileName().toString();
+    }
+
+    public void initializeChart(List<Map.Entry<String, Long>> extensionSizes, long totalDictSize) {
+        if (extensionSizes.isEmpty()) { //user unchecked topTenCheckBox
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You must include top 10 Extensions CheckBox for the chart to work!");
+            alert.showAndWait();
+        }
+        else {
+            double totalSizeMB = totalDictSize / (1024.0 * 1024.0);
+            extensionSizes.forEach(entry -> {
+                double sizeMB = entry.getValue() / (1024.0 * 1024.0);
+                double percentage = (sizeMB / totalSizeMB) * 100;
+
+                // Create a pie slice with label (extension type) and percentage
+                PieChart.Data slice = new PieChart.Data(
+                        String.format("%s (%.2f%%)", entry.getKey(), percentage), sizeMB);
+                pieChart.getData().add(slice);
+            });
+        }
     }
 
     @FXML

@@ -93,6 +93,8 @@ public class ProcessingDirectorySceneController {
                         Parent root = loader.load();
                         SaveResultsAndOrRestartController saveResultsAndOrRestartController = loader.getController();
                         saveResultsAndOrRestartController.setDirName(absulotePathOfDir);
+
+                        saveResultsAndOrRestartController.initializeChart(fileScanner.getFileStats().getTopTenExtCommon(), fileScanner.getFileStats().getTotalDictSize());
                         switchToScene3(root);
                     } catch (Exception e) {
                         Alert alert1 = new Alert(Alert.AlertType.ERROR, e.getMessage());

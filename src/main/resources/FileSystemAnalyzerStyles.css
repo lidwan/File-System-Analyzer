@@ -104,3 +104,60 @@ AnchorPane, GridPane{
     -fx-border-color: #af9595;
     -fx-border-image-width: 10;
 }
+
+/* Slice colors */
+.data0.chart-pie { -fx-pie-color: red; }
+.data1.chart-pie { -fx-pie-color: blue; }
+.data2.chart-pie { -fx-pie-color: green; }
+.data3.chart-pie { -fx-pie-color: yellow; }
+.data4.chart-pie { -fx-pie-color: #f59648; }
+.data5.chart-pie { -fx-pie-color: #830fff; }
+.data6.chart-pie { -fx-pie-color: #ff59e0; }
+.data7.chart-pie { -fx-pie-color: #3bffcc; }
+.data8.chart-pie { -fx-pie-color: #470008; }
+.data9.chart-pie { -fx-pie-color: #515151; }
+.data10.chart-pie { -fx-pie-color: #515151; }
+
+.data0.chart-pie:hover { -fx-pie-color: #6e0000; }
+.data1.chart-pie:hover { -fx-pie-color: #000083; }
+.data2.chart-pie:hover { -fx-pie-color: #004300; }
+.data3.chart-pie:hover { -fx-pie-color: #686800; }
+.data4.chart-pie:hover { -fx-pie-color: #b56d32; }
+.data5.chart-pie:hover { -fx-pie-color: #620ebc; }
+.data6.chart-pie:hover { -fx-pie-color: #932b7f; }
+.data7.chart-pie :hover { -fx-pie-color: #229779; }
+.data8.chart-pie:hover { -fx-pie-color: #2b0105; }
+.data9.chart-pie :hover { -fx-pie-color: #363636; }
+.data10.chart-pie:hover { -fx-pie-color: #363636; }
+
+.chart-title {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+}
+.chart-legend {
+    -fx-background-color: #433c3c;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.chart-legend-item {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff;
+}
+.chart-legend-item-symbol {
+    -fx-background-radius: 50%;
+}
+.chart-legend-item {
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+.chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #ffffff;
+}
+
+.chart {
+    -fx-text-fill: white;
+}

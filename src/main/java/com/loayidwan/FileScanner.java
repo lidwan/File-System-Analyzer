@@ -17,12 +17,18 @@ import java.util.stream.Stream;
 public class FileScanner {
     private final String dictPath;
 
+    public FileStats getFileStats() {
+        return fileStats;
+    }
+
+    private final FileStats fileStats;
     // Thread count used for multithreading
     // Uses all available resources on the machine
     private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
 
     public FileScanner(String dictPath){
         this.dictPath = dictPath;
+        fileStats = new FileStats();
     }
 
     //Scans for every file in "dictPath", making each file a task submitted to the executor.
@@ -30,8 +36,6 @@ public class FileScanner {
     //results file was created.
     public boolean scan(int[] userChoiceForResultFile, BiConsumer<String, Long> onFileProcessed) {
         try {
-            FileStats fileStats = new FileStats();
-
             //makes a fixed number of threads that can be used in parallel
             try (ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT)) {
 

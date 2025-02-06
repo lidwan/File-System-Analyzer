@@ -31,7 +31,7 @@ public class FilePickerSceneController {
 
     private String dirName;
     private String absulotePathOfDir;
-    private final int[] userChoiceForResultFile = new int[]{1,1,1,1};
+    private final int[] userChoiceForResultFile = new int[]{1,1,0,1};
 
     @FXML
     private void openDirectoryPicker() {

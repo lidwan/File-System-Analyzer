@@ -95,6 +95,7 @@ public class SaveResultsAndOrRestartController {
             try {
                 Files.copy(sourcePath, path, StandardCopyOption.REPLACE_EXISTING);
                 if (Files.exists(path)) {
+                    Files.delete(sourcePath);
                     Alert alert1 = new Alert(Alert.AlertType.INFORMATION, "File is now saved to the selected location");
                     alert1.setHeaderText("File Saved!");
                     saveFileLocation.setText("File Saved to \n" + path);

@@ -192,6 +192,6 @@ AnchorPane, GridPane{
 }
 
 #totalDirSizeLabel {
-    -fx-min-width: 60;
-    -fx-min-height: 30;
+    -fx-min-width: 85;
+    -fx-min-height: 35;
 }

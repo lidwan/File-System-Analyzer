@@ -21,16 +21,16 @@
                           </columnConstraints>
                           <rowConstraints>
                               <RowConstraints maxHeight="155.0" minHeight="0.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
-                           <RowConstraints maxHeight="503.0" minHeight="350.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="370.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
                            <RowConstraints maxHeight="503.0" minHeight="60.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
                            <RowConstraints maxHeight="503.0" minHeight="120.0" prefHeight="467.0" valignment="CENTER" />
-                              <RowConstraints maxHeight="503.0" minHeight="100.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="28.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
+                              <RowConstraints maxHeight="503.0" minHeight="35.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         <PieChart fx:id="pieChart" legendSide="RIGHT" title="Top 10 file types in size" GridPane.columnSpan="2" GridPane.rowSpan="2" />
-                        <HBox fx:id="bottomHBox" alignment="CENTER" spacing="35.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                        <HBox fx:id="bottomHBox" alignment="CENTER" spacing="20.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                            <children>
-                              <Label fx:id="totalNumOfFiles" text="Total number of scanned files: " />
-                              <Label fx:id="totalDirSizeLabel" minWidth="60.0" prefHeight="16.0" prefWidth="206.0" text="Total size of directory: " />
+                              <Label fx:id="totalDirSizeLabel" text="Total size of directory: " />
                            </children>
                         </HBox>
                         <HBox fx:id="outterHbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
@@ -44,6 +44,11 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
+                        <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <children>
+                              <Label fx:id="totalNumOfFiles" alignment="CENTER" text="Total number of scanned files: " />
+                           </children>
+                        </HBox>
                       </GridPane>
                   </children></AnchorPane>
          </content>

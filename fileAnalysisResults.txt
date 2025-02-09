@@ -1,52 +1,43 @@
-Result for scan on /home/lidwan/Downloads/TESTING: 
+-- DEMO RESULTS FILE w/ example numbers --
+Result for scan on /home/lidwan/Downloads/TESTING:
 
 - Top 10 Files and their sizes: 
 1- File name = kali-linux-2024.3-virtualbox-amd64.vdi | File Size = 15.21 GB
-2- File name = tails-amd64-6.11.iso | File Size = 1.47 GB
-3- File name = archlinux-2025.01.01-x86_64.iso | File Size = 1.15 GB
-4- File name = ventoy-1.1.00-linux.tar.gz | File Size = 19.06 MB
-5- File name = ventoy.disk.img.xz | File Size = 12.86 MB
-6- File name = ITN_Module_11_IPv4 Addressing.pptx | File Size = 3.72 MB
-7- File name = network layer_Classful addressing.ppt | File Size = 3.15 MB
-8- File name = routing_RIP.ppt | File Size = 2.91 MB
-9- File name = ITN_Module_14_Transport Layer.pptx | File Size = 2.76 MB
-10- File name = ITN_Module_3_Protocols and Models.pptx | File Size = 2.65 MB
+2- File name = IMG_8632.MOV | File Size = 2.47 GB
+3- File name = tails-amd64-6.11.iso | File Size = 1.47 GB
+4- File name = archlinux-2025.01.01-x86_64.iso | File Size = 1.15 GB
+5- File name = blahBlah.mp4 | File Size = 533.52 MB
+6- File name = DefNotBlahBlahButWithADiffNameAndExtension.someExtension | File Size = 533.52 MB
+7- File name = IMG_8745.MOV | File Size = 412.28 MB
+8- File name = IMG_8617.MOV | File Size = 214.28 MB
+9- File name = NO20250122-084916-051527F~051529F.MP4 | File Size = 177.75 MB
+10- File name = IMG_8780.MOV | File Size = 172.87 MB
+
 
 
 - Top 10 File extension types and their sizes: 
 1- Extension type = Virtual Machines | File Size = 15.21 GB
-2- Extension type = Disk Images | File Size = 2.62 GB
-3- Extension type = Presentations | File Size = 24.68 MB
-4- Extension type = Backup Files | File Size = 22.72 MB
-5- Extension type = Archives | File Size = 16.33 MB
-6- Extension type = Unknown | File Size = 6.76 MB
-7- Extension type = Images | File Size = 1.30 MB
-8- Extension type = Code Files | File Size = 1.12 MB
-9- Extension type = Fonts | File Size = 768.58 KB
-10- Extension type = System Files | File Size = 281.33 KB
+2- Extension type = Videos | File Size = 5.02 GB
+3- Extension type = Disk Images | File Size = 2.62 GB
+4- Extension type = Unknown | File Size = 540.34 MB
+5- Extension type = Images | File Size = 447.01 MB
+6- Extension type = Presentations | File Size = 89.74 MB
+7- Extension type = Backup Files | File Size = 41.77 MB
+8- Extension type = Code Files | File Size = 20.21 MB
+9- Extension type = Archives | File Size = 17.04 MB
+10- Extension type = Fonts | File Size = 768.58 KB
 
 
 - Duplicate Files (based on hashcode): 
-1- Multiple access MAC.ppt, Multiple access MAC.ppt,  | Each File Size = 1.46 MB
-2- menu_e.png, menu_w.png,  | Each File Size = 154.00 B
-3- terminal_box_c.png, terminal_box_c.png,  | Each File Size = 976.00 B
-4- terminal_box_w.png, terminal_box_w.png,  | Each File Size = 952.00 B
-5- terminal_box_s.png, terminal_box_s.png,  | Each File Size = 963.00 B
-6- terminal_box_ne.png, terminal_box_ne.png,  | Each File Size = 1.09 KB
-7- Ip Address.ppt, Ip Address.ppt,  | Each File Size = 1.54 MB
-8- terminal_box_e.png, terminal_box_e.png,  | Each File Size = 952.00 B
-9- glyphicons-halflings-regular.ttf, glyphicons-halflings-regular.ttf,  | Each File Size = 44.34 KB
-10- glyphicons-halflings-regular.woff2, glyphicons-halflings-regular.woff2,  | Each File Size = 17.61 KB
-11- terminal_box_n.png, terminal_box_n.png,  | Each File Size = 963.00 B
-12- terminal_box_se.png, terminal_box_se.png,  | Each File Size = 1.08 KB
-13- menu_se.png, menu_sw.png,  | Each File Size = 181.00 B
-14- glyphicons-halflings-regular.woff, glyphicons-halflings-regular.woff,  | Each File Size = 22.88 KB
-15- CyberEXS-1.0.0.tar.gz, CyberEXS-1.0.0.tar.gz,  | Each File Size = 1.83 MB
-16- main, main,  | Each File Size = 41.00 B
-17- terminal_box_nw.png, terminal_box_nw.png,  | Each File Size = 1.07 KB
-18- menu_ne.png, menu_nw.png,  | Each File Size = 178.00 B
-19- terminal_box_sw.png, terminal_box_sw.png,  | Each File Size = 1.08 KB
+1- Multiple access MAC.ppt, Networks-Chapter12.ppt,  | Each File Size = 1.46 MB
+2- ventoy-1.1.00-linux (copy).tar.gz, ventoy-1.1.00-linux.tar.gz,  | Each File Size = 19.06 MB
+3- commit-msg.sample, commit-msg.sample,  | Each File Size = 896.00 B
+4- network layer_Classful addressing.ppt, network layer.ppt | Each File Size = 1.16 MB
+5- DefNotBlahBlahButWithADiffNameAndExtension.someExtension, blahBlah.mp4,  | Each File Size = 533.52 MB
+6- Vimix-1080p (copy).tar.xz, Vimix-1080p.tar.xz,  | Each File Size = 734.78 KB
 
-- Total number of files scanned: 399
+- Total size of duplicate files (without the size of the original files): 623.31 MB
 
-- Total directory size 17.90 GB
+- Total number of files scanned: 869
+
+- Total directory size 23.98 GB

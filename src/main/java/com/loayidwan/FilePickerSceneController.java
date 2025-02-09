@@ -29,9 +29,12 @@ public class FilePickerSceneController {
     @FXML
     private CheckBox totalFileCountAndDirSizeCheckBox;
 
+    @FXML
+    private CheckBox deleteDuplicateFilesCheckBox;
+
     private String dirName;
     private String absulotePathOfDir;
-    private final int[] userChoiceForResultFile = new int[]{1,1,0,1};
+    private final int[] userChoiceForResultFile = new int[]{1,1,0,1,0};
 
     @FXML
     private void openDirectoryPicker() {
@@ -56,7 +59,7 @@ public class FilePickerSceneController {
 
     public void switchToScene3(javafx.event.ActionEvent event) {
         try {
-            if (absulotePathOfDir != null) {
+            if (absulotePathOfDir != null && !(!duplicateFilesCheckBox.isSelected() && deleteDuplicateFilesCheckBox.isSelected())) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/processingDirectoryScene.fxml"));
                 Parent root = loader.load();
                 ProcessingDirectorySceneController processingDirectorySceneController = loader.getController();
@@ -69,6 +72,7 @@ public class FilePickerSceneController {
                 if (!topTenExtensionsCheckBox.isSelected()) {userChoiceForResultFile[1] = 0;}
                 if (duplicateFilesCheckBox.isSelected()) {userChoiceForResultFile[2] = 1;}
                 if (!totalFileCountAndDirSizeCheckBox.isSelected()) {userChoiceForResultFile[3] = 0;}
+                if (deleteDuplicateFilesCheckBox.isSelected()) {userChoiceForResultFile[4] = 1;}
 
                 //passing user choices to next scene
                 processingDirectorySceneController.setUserChoice(userChoiceForResultFile);
@@ -82,9 +86,11 @@ public class FilePickerSceneController {
 
                 //start scanning directory
                 processingDirectorySceneController.startProcessingDirectory();
-            }
-            else {
+            } else if (absulotePathOfDir != null){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You did NOT choose a directory, Please choose a dir before attempting to start scanning ");
+                alert.showAndWait();
+            } else if ((!duplicateFilesCheckBox.isSelected() && deleteDuplicateFilesCheckBox.isSelected())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "The program can't delete duplicate files if you turn off duplicate detection, if you with to delete duplicates please turn on BOTH duplicate detection and deletion.");
                 alert.showAndWait();
             }
         } catch (Exception e) {

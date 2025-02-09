@@ -17,6 +17,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
         <Label id="titleSelectDirToScan" fx:id="titleSelectDirToScan" prefHeight="93.0" prefWidth="445.0" text="Select Directory to scan" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
@@ -36,6 +37,7 @@
             <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" text="Include Duplicate files and their sizes&#10;(takes considerably more time since&#10;it compares each file hashcode)" />
             <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" wrapText="true" VBox.vgrow="ALWAYS" />
         </VBox>
-        <Button fx:id="startScanButton" alignment="CENTER" mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+        <Button fx:id="startScanButton" alignment="CENTER" mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <CheckBox fx:id="deleteDuplicateFilesCheckBox" mnemonicParsing="false" text="Delete Duplicate files (only keeps one copy, only works if you also include Duplicate files CeckBox)" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
     </GridPane>
 </AnchorPane>

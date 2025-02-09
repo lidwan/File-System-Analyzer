@@ -85,7 +85,7 @@ AnchorPane, GridPane{
     -fx-font-size: 20;
     -fx-font-weight: bold;
 }
-#topTenFilesCheckBox, #topTenExtensionsCheckBox,#duplicateFilesCheckBox, #totalFileCountAndDirSizeCheckBox{
+#topTenFilesCheckBox, #topTenExtensionsCheckBox,#duplicateFilesCheckBox, #totalFileCountAndDirSizeCheckBox, #deleteDuplicateFilesCheckBox{
     -fx-font-size: 16;
 }
 

@@ -32,7 +32,7 @@ public class ProcessingDirectorySceneController {
 
 
     private static final int MAX_ITEMS = 21;
-    private final int[] userChoiceForResultFile = new int[4];
+    private final int[] userChoiceForResultFile = new int[5];
     private String absulotePathOfDir;
     private final ObservableList<String> fileItems =
             FXCollections.observableArrayList();
@@ -68,6 +68,7 @@ public class ProcessingDirectorySceneController {
         userChoiceForResultFile[1] = array[1];
         userChoiceForResultFile[2] = array[2];
         userChoiceForResultFile[3] = array[3];
+        userChoiceForResultFile[4] = array[4];
     }
 
     public void startProcessingDirectory() {
@@ -93,8 +94,40 @@ public class ProcessingDirectorySceneController {
                         Parent root = loader.load();
                         SaveResultsAndOrRestartController saveResultsAndOrRestartController = loader.getController();
                         saveResultsAndOrRestartController.setDirName(absulotePathOfDir);
+                        saveResultsAndOrRestartController.setTotalNumOfFiles(fileScanner.getFileStats().getNumberOfFiles());
+                        saveResultsAndOrRestartController.setTotalDirSizeLabel(fileScanner.getFileStats().getTotalDictSize());
 
-                        saveResultsAndOrRestartController.initializeChart(fileScanner.getFileStats().getTopTenExtCommon(), fileScanner.getFileStats().getTotalDictSize());
+                        HBox bottomHBox = saveResultsAndOrRestartController.getBottomHBox();
+
+                        if (userChoiceForResultFile[4] == 1 && userChoiceForResultFile[2] == 1){
+                            bottomHBox.getChildren().add(new Label("Total space saved by deleting duplicates: " +
+                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue())));
+                        }
+                        else if (userChoiceForResultFile[4] == 0 && userChoiceForResultFile[2] == 1) {
+                            bottomHBox.getChildren().add(new Label("Total space you could save by deleting duplicate files: " +
+                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue())));
+                        }
+                        saveResultsAndOrRestartController.initializeChart(fileScanner.getFileStats().getTopTenExtCommon(),
+                                fileScanner.getFileStats().getTotalDictSize());
+
+                        VBox vBox1 = saveResultsAndOrRestartController.getvBox1();
+                        VBox vBox2 = saveResultsAndOrRestartController.getvBox2();
+
+                        AtomicInteger tmpCounter = new AtomicInteger(1);
+
+                        //dynamically adding the top ten files in size
+                        fileScanner.getFileStats().getTopTenFileSizes().forEach((entry) -> {
+                            if (tmpCounter.get() <= 5) {
+                                vBox1.getChildren().add(new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
+                                        " | " + FileUtils.humanReadableSize(entry.getValue())));
+                                tmpCounter.getAndIncrement();
+                            }
+                            else {
+                                vBox2.getChildren().add(new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
+                                        " | " + FileUtils.humanReadableSize(entry.getValue())));
+                                tmpCounter.getAndIncrement();
+                            }
+                        });
                         switchToScene3(root);
                     } catch (Exception e) {
                         Alert alert1 = new Alert(Alert.AlertType.ERROR, e.getMessage());

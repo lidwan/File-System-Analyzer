@@ -22,6 +22,7 @@ public class FileStats {
     private static ConcurrentHashMap<String, List<String>> commonExtensionsGrouped;
     private final LongAdder totalDictSize;
     private final AtomicInteger numberOfFiles;
+    private final LongAdder totalDuplicateFilesSize;
 
 
     public FileStats() {
@@ -32,6 +33,7 @@ public class FileStats {
         commonExtensionsGrouped = new ConcurrentHashMap<>();
         this.totalDictSize = new LongAdder();
         numberOfFiles = new AtomicInteger(0);
+        this.totalDuplicateFilesSize = new LongAdder();
 
         //Thx to AI, this didn't take forever to compile.
         //This is common extension types and what they usually mean so that the program can output extensions in a humanly readable way
@@ -67,18 +69,25 @@ public class FileStats {
             handleExtensions(extension, size);
         }
         if (userChoiceForResultFile[2] == 1)
-            handleDuplicateFiles(filePath);
+            handleDuplicateFiles(filePath, size);
         if (userChoiceForResultFile[3] == 1) {
             totalDictSize.add(size);
             numberOfFiles.addAndGet(1);
         }
     }
 
+    public AtomicInteger getNumberOfFiles() {
+        return numberOfFiles;
+    }
+
+    public LongAdder getTotalDuplicateFilesSize() {
+        return totalDuplicateFilesSize;
+    }
     // This method calls calcHashCode to get the hashcode of the file, then tries to add the file as the
     // original file to duplicateFilesMap, it wasn't the original file for this hashcode then
     // duplicates are detected, then if this is the first duplicate file for this hashcode a list is initialized
     // and the original file is added in the list, then the current file is added.
-    private void handleDuplicateFiles(Path filePath) throws NoSuchAlgorithmException {
+    private void handleDuplicateFiles(Path filePath, long size) throws NoSuchAlgorithmException {
         String hashCode = FileUtils.calcHashCode(filePath);
         String currentFilePath = filePath.toAbsolutePath().toString();
         String existingFilePath = hashCodeToFileNameMap.putIfAbsent(hashCode, currentFilePath);
@@ -89,6 +98,7 @@ public class FileStats {
                 list.add(Path.of(existingFilePath));
                 return list;
             }).add(Path.of(currentFilePath)); // Add the current duplicate
+            totalDuplicateFilesSize.add(size);
         }
     }
 
@@ -120,6 +130,7 @@ public class FileStats {
     //userChoiceForResultFile[1] is TopTenExtensions,
     //userChoiceForResultFile[2] is DuplicateFiles,
     //userChoiceForResultFile[3] is TotalNumberOfFiles and TotalDictSize.
+    //userChoiceForResultFile[4] is duplicates deletion.
     //userChoiceForResultFile is initialized to all 1's representing including all sections.
     //The value 0 means the user asked for this section to be removed.
     public void makeResFile(String dictPath, int[] userChoiceForResultFile){
@@ -136,8 +147,12 @@ public class FileStats {
             if (userChoiceForResultFile[1] == 1)
                 writeTopTenExtensions(writer, tmpCounter);
 
-            if (userChoiceForResultFile[2] == 1)
+            if (userChoiceForResultFile[2] == 1) {
                 writeDuplicateFiles(writer, tmpCounter);
+
+                if (userChoiceForResultFile[4] == 1)
+                    deleteDuplicateFiles();
+            }
 
             if (userChoiceForResultFile[3] == 1){
                 writeTotalNumberOfFiles(writer);
@@ -148,6 +163,27 @@ public class FileStats {
             System.err.println("An error occurred while writing to result file.");
             Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, "An error occurred while writing to result file."));
         }
+    }
+
+    private void deleteDuplicateFiles() {
+        //removes the first file detected so it doesn't also get deleted.
+        duplicateFilesMap.forEach((_, list) ->{
+            list.removeFirst();
+        });
+
+        duplicateFilesMap.forEach((_, list) ->{
+            for (Path path : list){
+                try {
+                    Files.delete(path);
+                } catch (Exception e) {
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred while writing to result file.");
+                        alert.showAndWait();
+                    });
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     private void writeTotalNumberOfFiles(FileWriter writer) throws IOException {
@@ -170,6 +206,8 @@ public class FileStats {
                             fileNameToSizeMap.get(listOfDuplicateFiles.getFirst()))+"\n");
             tmpCounter.getAndIncrement();
         }
+        writer.write("Total size of duplicate files (without the size of the original files): " +
+                FileUtils.humanReadableSize(totalDuplicateFilesSize.longValue())+"\n");
         tmpCounter.lazySet(1);
     }
 

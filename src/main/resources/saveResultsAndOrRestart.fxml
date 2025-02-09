@@ -8,26 +8,62 @@
 <!--suppress JavaFxUnresolvedFxIdReference -->
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.SaveResultsAndOrRestartController">
-    <GridPane prefHeight="563.0" prefWidth="861.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="155.0" minHeight="0.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
-         <RowConstraints maxHeight="503.0" minHeight="400.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="503.0" minHeight="150.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="170.0" minHeight="60.0" prefHeight="170.0" valignment="CENTER" vgrow="ALWAYS" />
-        </rowConstraints>
-        <Button fx:id="scanNewDir" alignment="CENTER" mnemonicParsing="false" onAction="#switchToScene2" text="Scan a new directory" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-      <font>
-          <Font size="19.0" />
-      </font>
-        </Button>
-        <VBox alignment="CENTER" prefHeight="297.0" prefWidth="920.0" spacing="30.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-            <Button fx:id="whereToSaveButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Choose where to save detaild results file" />
-            <Label fx:id="saveFileLocation" text="No directory selected" />
-        </VBox>
-      <PieChart fx:id="pieChart" legendSide="RIGHT" title="Top 10 file types in size" GridPane.columnSpan="2" GridPane.rowSpan="2" />
-    </GridPane>
+   <TabPane prefHeight="700.0" prefWidth="1000.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+     <tabs>
+       <Tab closable="false" text="File Analysis">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                      <GridPane prefHeight="629.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints maxHeight="155.0" minHeight="0.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="350.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="40.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="100.0" prefHeight="467.0" valignment="CENTER" />
+                              <RowConstraints maxHeight="503.0" minHeight="150.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
+                          </rowConstraints>
+                        <PieChart fx:id="pieChart" legendSide="RIGHT" title="Top 10 file types in size" GridPane.columnSpan="2" GridPane.rowSpan="2" />
+                        <HBox fx:id="bottomHBox" alignment="CENTER" spacing="50.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                           <children>
+                              <Label fx:id="totalNumOfFiles" text="Total number of scanned files: " />
+                              <Label fx:id="totalDirSizeLabel" text="Total size of directory: " />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                           <children>
+                              <VBox fx:id="vBox1" spacing="5.0" />
+                              <VBox fx:id="vBox2" layoutX="432.0" layoutY="10.0" spacing="5.0" />
+                           </children>
+                        </HBox>
+                        <Label text="Top 10 files in size" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                      </GridPane>
+                  </children></AnchorPane>
+         </content>
+       </Tab>
+       <Tab closable="false" text="Save Results or Scan a new directory">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                       <VBox alignment="CENTER" prefHeight="629.0" prefWidth="960.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <Button fx:id="whereToSaveButton" mnemonicParsing="false" onAction="#openDirectoryPicker" text="Choose where to save detaild results file" />
+                           <Label fx:id="saveFileLocation" text="No directory selected" />
+                          <Button fx:id="scanNewDir" alignment="CENTER" mnemonicParsing="false" onAction="#switchToScene2" text="Scan a new directory">
+                        <font>
+                            <Font size="19.0" />
+                        </font>
+                          </Button>
+                       </VBox>
+                  </children></AnchorPane>
+         </content>
+       </Tab>
+     </tabs>
+   </TabPane>
 </AnchorPane>

@@ -12,7 +12,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProcessingDirectorySceneController {
     @FXML
@@ -86,7 +91,7 @@ public class ProcessingDirectorySceneController {
                 //runs after scan is complete (and is successful) and user clicks ok
                 Platform.runLater(() -> {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                            "Results File was created.\nYou can choose where to save it in the next page");
+                            "Scan completed successfully.\nView Directory analysis or scan a new directory in the next page.");
                     alert.setHeaderText("Scan completed!");
                     alert.showAndWait();
                     try {
@@ -100,12 +105,17 @@ public class ProcessingDirectorySceneController {
                         HBox bottomHBox = saveResultsAndOrRestartController.getBottomHBox();
 
                         if (userChoiceForResultFile[4] == 1 && userChoiceForResultFile[2] == 1){
-                            bottomHBox.getChildren().add(new Label("Total space saved by deleting duplicates: " +
-                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue())));
+                            Label label2 = new Label("Total space saved by deleting duplicates: " +
+                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue()));
+                            label2.setStyle("-fx-font-size: 14");
+                            bottomHBox.getChildren().add(label2);
                         }
                         else if (userChoiceForResultFile[4] == 0 && userChoiceForResultFile[2] == 1) {
-                            bottomHBox.getChildren().add(new Label("Total space you could save by deleting duplicate files: " +
-                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue())));
+                            Label label = new Label("Total space you could save by deleting duplicate files: " +
+                                    FileUtils.humanReadableSize(fileScanner.getFileStats().getTotalDuplicateFilesSize().longValue()));
+                            label.setMinWidth(50);
+                            label.setStyle("-fx-font-size: 14");
+                            bottomHBox.getChildren().add(label);
                         }
                         saveResultsAndOrRestartController.initializeChart(fileScanner.getFileStats().getTopTenExtCommon(),
                                 fileScanner.getFileStats().getTotalDictSize());
@@ -118,13 +128,17 @@ public class ProcessingDirectorySceneController {
                         //dynamically adding the top ten files in size
                         fileScanner.getFileStats().getTopTenFileSizes().forEach((entry) -> {
                             if (tmpCounter.get() <= 5) {
-                                vBox1.getChildren().add(new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
-                                        " | " + FileUtils.humanReadableSize(entry.getValue())));
+                                Label label = new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
+                                        " | " + FileUtils.humanReadableSize(entry.getValue()));
+                                label.setStyle("-fx-font-size: 14");
+                                vBox1.getChildren().add(label);
                                 tmpCounter.getAndIncrement();
                             }
                             else {
-                                vBox2.getChildren().add(new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
-                                        " | " + FileUtils.humanReadableSize(entry.getValue())));
+                                Label label1 = new Label(tmpCounter + "- "+ entry.getKey().getFileName() +
+                                        " | " + FileUtils.humanReadableSize(entry.getValue()));
+                                label1.setStyle("-fx-font-size: 14");
+                                vBox2.getChildren().add(label1);
                                 tmpCounter.getAndIncrement();
                             }
                         });

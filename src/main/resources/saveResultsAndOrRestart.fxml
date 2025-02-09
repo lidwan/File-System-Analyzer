@@ -7,14 +7,14 @@
 
 <!--suppress JavaFxUnresolvedFxIdReference -->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.SaveResultsAndOrRestartController">
-   <TabPane prefHeight="700.0" prefWidth="1000.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.SaveResultsAndOrRestartController">
+   <TabPane fx:id="tabPane" prefHeight="700.0" prefWidth="1000.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
      <tabs>
-       <Tab closable="false" text="File Analysis">
+       <Tab closable="false" text="Directory Analysis">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                      <GridPane prefHeight="629.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <GridPane prefHeight="609.0" prefWidth="958.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -22,18 +22,18 @@
                           <rowConstraints>
                               <RowConstraints maxHeight="155.0" minHeight="0.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
                            <RowConstraints maxHeight="503.0" minHeight="350.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
-                           <RowConstraints maxHeight="503.0" minHeight="40.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
-                           <RowConstraints maxHeight="503.0" minHeight="100.0" prefHeight="467.0" valignment="CENTER" />
-                              <RowConstraints maxHeight="503.0" minHeight="150.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="60.0" prefHeight="467.0" valignment="CENTER" vgrow="ALWAYS" />
+                           <RowConstraints maxHeight="503.0" minHeight="120.0" prefHeight="467.0" valignment="CENTER" />
+                              <RowConstraints maxHeight="503.0" minHeight="100.0" prefHeight="300.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         <PieChart fx:id="pieChart" legendSide="RIGHT" title="Top 10 file types in size" GridPane.columnSpan="2" GridPane.rowSpan="2" />
-                        <HBox fx:id="bottomHBox" alignment="CENTER" spacing="50.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                        <HBox fx:id="bottomHBox" alignment="CENTER" spacing="35.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                            <children>
                               <Label fx:id="totalNumOfFiles" text="Total number of scanned files: " />
-                              <Label fx:id="totalDirSizeLabel" text="Total size of directory: " />
+                              <Label fx:id="totalDirSizeLabel" minWidth="60.0" prefHeight="16.0" prefWidth="206.0" text="Total size of directory: " />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <HBox fx:id="outterHbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                            <children>
                               <VBox fx:id="vBox1" spacing="5.0" />
                               <VBox fx:id="vBox2" layoutX="432.0" layoutY="10.0" spacing="5.0" />
@@ -41,7 +41,7 @@
                         </HBox>
                         <Label text="Top 10 files in size" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <font>
-                              <Font name="System Bold" size="21.0" />
+                              <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
                       </GridPane>

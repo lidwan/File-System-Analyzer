@@ -161,3 +161,37 @@ AnchorPane, GridPane{
 .chart {
     -fx-text-fill: white;
 }
+
+.tab-pane {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #444444;
+    -fx-border-width: 0.5px;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #2c2c2c;
+}
+
+.tab-pane .tab-content-area {
+    -fx-background-color: #1e1e1e;
+}
+
+.tab {
+    -fx-background-color: #505050;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+}
+
+.tab:selected {
+    -fx-background-color: #696969;
+    -fx-text-fill: yellow;
+}
+
+.tab:hover {
+    -fx-background-color: #838282;
+}
+
+#totalDirSizeLabel {
+    -fx-min-width: 60;
+    -fx-min-height: 30;
+}

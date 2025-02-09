@@ -6,7 +6,7 @@
 
 <!--suppress JavaFxUnresolvedFxIdReference -->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@FileSystemAnalyzerStyles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loayidwan.FilePickerSceneController">
     <GridPane prefHeight="563.0" prefWidth="861.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -16,7 +16,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
@@ -33,8 +33,8 @@
             <CheckBox fx:id="topTenFilesCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Files in size          " />
             <CheckBox fx:id="topTenExtensionsCheckBox" mnemonicParsing="false" selected="true" text="Include Top 10 Extensions in size" />
         </VBox>
-        <VBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-            <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" text="Include Duplicate files and their sizes&#10;(takes considerably more time since&#10;it compares each file hashcode)" />
+        <VBox alignment="CENTER_LEFT" spacing="15.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <CheckBox fx:id="duplicateFilesCheckBox" mnemonicParsing="false" prefHeight="64.0" prefWidth="329.0" text="Include Duplicate files and their sizes&#10;(takes considerably more time since&#10;it compares each file hashcode)" />
             <CheckBox fx:id="totalFileCountAndDirSizeCheckBox" minHeight="-Infinity" mnemonicParsing="false" selected="true" text="Include Total Number of Files Scanned,&#10;and Total directory size&#10;" wrapText="true" VBox.vgrow="ALWAYS" />
         </VBox>
         <Button fx:id="startScanButton" alignment="CENTER" mnemonicParsing="false" onAction="#switchToScene3" text="Start the Scan" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />

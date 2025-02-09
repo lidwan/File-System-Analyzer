@@ -86,7 +86,7 @@ public class FilePickerSceneController {
 
                 //start scanning directory
                 processingDirectorySceneController.startProcessingDirectory();
-            } else if (absulotePathOfDir != null){
+            } else if (absulotePathOfDir == null){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You did NOT choose a directory, Please choose a dir before attempting to start scanning ");
                 alert.showAndWait();
             } else if ((!duplicateFilesCheckBox.isSelected() && deleteDuplicateFilesCheckBox.isSelected())) {

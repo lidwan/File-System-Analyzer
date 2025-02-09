@@ -90,7 +90,7 @@ public class FilePickerSceneController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "You did NOT choose a directory, Please choose a dir before attempting to start scanning ");
                 alert.showAndWait();
             } else if ((!duplicateFilesCheckBox.isSelected() && deleteDuplicateFilesCheckBox.isSelected())) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "The program can't delete duplicate files if you turn off duplicate detection, if you with to delete duplicates please turn on BOTH duplicate detection and deletion.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "The program can't delete duplicate files if you turn off duplicate detection, if you wish to delete duplicates please turn on BOTH duplicate detection and deletion.");
                 alert.showAndWait();
             }
         } catch (Exception e) {

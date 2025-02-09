@@ -151,7 +151,7 @@ public class FileStats {
                 writeDuplicateFiles(writer, tmpCounter);
 
                 if (userChoiceForResultFile[4] == 1)
-                    deleteDuplicateFiles();
+                    deleteDuplicateFiles(writer);
             }
 
             if (userChoiceForResultFile[3] == 1){
@@ -165,16 +165,26 @@ public class FileStats {
         }
     }
 
-    private void deleteDuplicateFiles() {
+    private void deleteDuplicateFiles(FileWriter writer) throws IOException {
         //removes the first file detected so it doesn't also get deleted.
+        writer.write("\nOriginal files (retained and not deleted): \n");
         duplicateFilesMap.forEach((_, list) ->{
-            list.removeFirst();
-        });
+            Path removed = list.removeFirst();
+            try {
+                writer.write("File "+removed.toAbsolutePath().toString()+" ( NOT DELETED )\n");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
+        });
+        writer.write("\nDuplicate files (deleted): \n");
         duplicateFilesMap.forEach((_, list) ->{
             for (Path path : list){
                 try {
                     Files.delete(path);
+                    if (!Files.exists(path)) {
+                        writer.write("File "+path.toAbsolutePath().toString()+" ( DELETED )\n");
+                    }
                 } catch (Exception e) {
                     Platform.runLater(() -> {
                         Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred while writing to result file.");
@@ -206,13 +216,13 @@ public class FileStats {
                             fileNameToSizeMap.get(listOfDuplicateFiles.getFirst()))+"\n");
             tmpCounter.getAndIncrement();
         }
-        writer.write("Total size of duplicate files (without the size of the original files): " +
+        writer.write("\n- Total size of duplicate files (without the size of the original files): " +
                 FileUtils.humanReadableSize(totalDuplicateFilesSize.longValue())+"\n");
         tmpCounter.lazySet(1);
     }
 
     private void writeTopTenExtensions(FileWriter writer, AtomicInteger tmpCounter) throws IOException {
-        writer.write("\n\n- Top 10 File extension types and their sizes: \n");
+        writer.write("\n\n\n- Top 10 File extension types and their sizes: \n");
         for (Map.Entry<String, Long> e : getTopTenExtCommon()) {
             writer.write(tmpCounter + "- Extension type = " + e.getKey() +
                     " | File Size = " + FileUtils.humanReadableSize(e.getValue()) + "\n");

@@ -35,8 +35,7 @@ public class ProcessingDirectorySceneController {
     @FXML
     ProgressBar progressBar;
 
-
-    private static final int MAX_ITEMS = 21;
+    private static final int MAX_ITEMS = 21; //max items in viewlist
     private final int[] userChoiceForResultFile = new int[5];
     private String absulotePathOfDir;
     private final ObservableList<String> fileItems =
@@ -61,19 +60,6 @@ public class ProcessingDirectorySceneController {
                 }
             }
         });
-    }
-
-    //Sets the Scene title to Processing "DIRECTORY".
-    public void setProcessingDirTitle(String x) {
-        processingDirTitle.setText(processingDirTitle.getText() + x +"\"..");
-    }
-
-    public void setUserChoice(int[] array) {
-        userChoiceForResultFile[0] = array[0];
-        userChoiceForResultFile[1] = array[1];
-        userChoiceForResultFile[2] = array[2];
-        userChoiceForResultFile[3] = array[3];
-        userChoiceForResultFile[4] = array[4];
     }
 
     public void startProcessingDirectory() {
@@ -155,10 +141,6 @@ public class ProcessingDirectorySceneController {
         }).start();
     }
 
-    public void setabsulotePathOfDir(String absulotePathOfDir) {
-        this.absulotePathOfDir = absulotePathOfDir;
-    }
-
     public void switchToScene3(Parent root) {
         try {
             if (stage == null) {
@@ -175,5 +157,23 @@ public class ProcessingDirectorySceneController {
             alert.showAndWait();
         }
 
+    }
+
+    //setters
+    public void setabsulotePathOfDir(String absulotePathOfDir) {
+        this.absulotePathOfDir = absulotePathOfDir;
+    }
+
+    //Sets the Scene title to Processing "DIRECTORY".
+    public void setProcessingDirTitle(String x) {
+        processingDirTitle.setText(processingDirTitle.getText() + x +"\"..");
+    }
+
+    public void setUserChoice(int[] array) {
+        userChoiceForResultFile[0] = array[0];
+        userChoiceForResultFile[1] = array[1];
+        userChoiceForResultFile[2] = array[2];
+        userChoiceForResultFile[3] = array[3];
+        userChoiceForResultFile[4] = array[4];
     }
 }

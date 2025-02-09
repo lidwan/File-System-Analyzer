@@ -165,7 +165,7 @@ AnchorPane, GridPane{
 .tab-pane {
     -fx-background-color: #2a2a2a;
     -fx-border-color: #444444;
-    -fx-border-width: 0.5px;
+    -fx-border-width: 1px;
 }
 
 .tab-pane .tab-header-background {

@@ -39,61 +39,20 @@ public class SaveResultsAndOrRestartController {
     private PieChart pieChart;
 
     @FXML
-    private Label totalDuplLabel;
-
-    @FXML
     private Label totalDirSizeLabel;
-
-    public VBox getvBox1() {
-        return vBox1;
-    }
 
     @FXML
     private VBox vBox1;
 
-    public VBox getvBox2() {
-        return vBox2;
-    }
-
     @FXML
     private VBox vBox2;
-
-    public HBox getBottomHBox() {
-        return bottomHBox;
-    }
 
     @FXML
     private HBox bottomHBox;
 
-    public void setTotalDirSizeLabel(Long size) {
-        totalDirSizeLabel.setText(totalDirSizeLabel.getText() + FileUtils.humanReadableSize(size));
-    }
-
-    public void setTotalNumOfFiles(AtomicInteger totalNumOfFiles) {
-        this.totalNumOfFiles.setText(this.totalNumOfFiles.getText() + totalNumOfFiles);
-
-    }
-
-    public void setTotalDuplLabel(Long size) {
-        totalDuplLabel.setText(totalDirSizeLabel.getText() + FileUtils.humanReadableSize(size));
-    }
-
-    public void setTotalDuplLabel(String text) {
-        totalDuplLabel.setText(text);
-    }
-
     @FXML
     private Label totalNumOfFiles;
 
-    @FXML
-    public void setDirName(String absulotePathOfDir) {
-        dirName = Paths.get(absulotePathOfDir).getFileName().toString();
-    }
-
-
-    public Label getTotalDuplLabel() {
-        return totalDuplLabel;
-    }
 
     public void initializeChart(List<Map.Entry<String, Long>> extensionSizes, long totalDictSize) {
         if (extensionSizes.isEmpty()) { //user unchecked topTenCheckBox
@@ -178,4 +137,34 @@ public class SaveResultsAndOrRestartController {
             alert.showAndWait();
         }
     }
+
+    //getters
+    public HBox getBottomHBox() {
+        return bottomHBox;
+    }
+
+    public VBox getvBox2() {
+        return vBox2;
+    }
+
+
+    public VBox getvBox1() {
+        return vBox1;
+    }
+
+    //setters
+    public void setTotalDirSizeLabel(Long size) {
+        totalDirSizeLabel.setText(totalDirSizeLabel.getText() + FileUtils.humanReadableSize(size));
+    }
+
+    public void setTotalNumOfFiles(AtomicInteger totalNumOfFiles) {
+        this.totalNumOfFiles.setText(this.totalNumOfFiles.getText() + totalNumOfFiles);
+
+    }
+
+    @FXML
+    public void setDirName(String absulotePathOfDir) {
+        dirName = Paths.get(absulotePathOfDir).getFileName().toString();
+    }
+
 }

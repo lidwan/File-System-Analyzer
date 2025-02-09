@@ -76,13 +76,6 @@ public class FileStats {
         }
     }
 
-    public AtomicInteger getNumberOfFiles() {
-        return numberOfFiles;
-    }
-
-    public LongAdder getTotalDuplicateFilesSize() {
-        return totalDuplicateFilesSize;
-    }
     // This method calls calcHashCode to get the hashcode of the file, then tries to add the file as the
     // original file to duplicateFilesMap, it wasn't the original file for this hashcode then
     // duplicates are detected, then if this is the first duplicate file for this hashcode a list is initialized
@@ -118,10 +111,6 @@ public class FileStats {
         if (!found) {
             commonExtensionsGroupedToSize.merge("Unknown", size, Long::sum);
         }
-    }
-
-    public long getTotalDictSize(){
-        return totalDictSize.sum();
     }
 
     //Makes the result file, which is customizable by the user in GUI, user choices are passed to the method
@@ -171,7 +160,7 @@ public class FileStats {
         duplicateFilesMap.forEach((_, list) ->{
             Path removed = list.removeFirst();
             try {
-                writer.write("File "+removed.toAbsolutePath().toString()+" ( NOT DELETED )\n");
+                writer.write("File "+ removed.toAbsolutePath() +" ( NOT DELETED )\n");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -183,7 +172,7 @@ public class FileStats {
                 try {
                     Files.delete(path);
                     if (!Files.exists(path)) {
-                        writer.write("File "+path.toAbsolutePath().toString()+" ( DELETED )\n");
+                        writer.write("File "+ path.toAbsolutePath() +" ( DELETED )\n");
                     }
                 } catch (Exception e) {
                     Platform.runLater(() -> {
@@ -239,6 +228,19 @@ public class FileStats {
             tmpCounter.getAndIncrement();
         }
         tmpCounter.lazySet(1);
+    }
+
+    //getters
+    public AtomicInteger getNumberOfFiles() {
+        return numberOfFiles;
+    }
+
+    public LongAdder getTotalDuplicateFilesSize() {
+        return totalDuplicateFilesSize;
+    }
+
+    public long getTotalDictSize(){
+        return totalDictSize.sum();
     }
 
     public List<Map.Entry<Path, Long>> getTopTenFileSizes(){
